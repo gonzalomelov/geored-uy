@@ -6,15 +6,16 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
    <!-- The datasource is bound into JNDI at this location. We reference 
-      this in META-INF/persistence.xml -->
-   <datasource jndi-name="java:jboss/datasources/geored-uyDS"
-      pool-name="{artifactId}" enabled="true"
+      this in META-INF/test-persistence.xml -->
+   <datasource jndi-name="java:jboss/datasources/geored-uyTestDS"
+      pool-name="geored-uy-test" enabled="true"
       use-java-context="true">
-      <connection-url>jdbc:postgresql://localhost:5432/georeduyDB</connection-url>
-      <driver>postgresql</driver>
+      <connection-url>jdbc:h2:mem:geored-uy-test;DB_CLOSE_DELAY=-1</connection-url>
+      <driver>h2</driver>
       <security>
-         <user-name>gonza</user-name>
-         <password></password>
+         <user-name>sa</user-name>
+         <password>sa</password>
       </security>
    </datasource>
 </datasources>
+ 
