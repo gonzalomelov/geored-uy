@@ -36,6 +36,7 @@ public class MemberListProducer {
 
    @PostConstruct
    public void retrieveAllMembersOrderedByName() {
+	   System.out.println("Members PostContructor");
       CriteriaBuilder cb = em.getCriteriaBuilder();
       CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
       Root<Member> member = criteria.from(Member.class);

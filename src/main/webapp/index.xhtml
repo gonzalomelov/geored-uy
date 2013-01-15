@@ -67,5 +67,15 @@
             REST URL for all members: <a href="#{request.contextPath}/rest/members">/rest/members</a>
          </f:facet>
       </h:dataTable>
+      <h:dataTable var="_company" value="#{companies}" rendered="{not empty companies}" styleClass="simpletablestyle">
+      	<h:column>
+      		<f:facet name="header">Name</f:facet>
+      		#{_company.name}
+      	</h:column>
+      	<h:column>
+      		<f:facet name="header">Description</f:facet>
+      		#{_company.description}
+      	</h:column>
+      </h:dataTable>
    </ui:define>
 </ui:composition>
