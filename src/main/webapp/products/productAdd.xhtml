@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h1>Add Product</h1>
+		<h:form>
+			<h:panelGrid>
+				<h:outputLabel for="name">Name:</h:outputLabel>
+				<h:inputText id="name" value="#{productController.product.name}" required="true"/>
+				<h:outputLabel for="description">Description:</h:outputLabel>
+				<h:inputTextarea id="description" value="#{productController.product.description}"/>
+			</h:panelGrid>
+			<h:commandButton value="Submit" type="submit" action="#{productController.addProduct()}" />
+		</h:form>
+		<br/>
+		<h:link value="Home Page" outcome="/index"/>
+		
+	</ui:define>
+
+</ui:composition>
+</html>

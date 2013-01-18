@@ -1,43 +1,57 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-   <title>Java EE 6 Starter Application</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <h:outputStylesheet name="css/screen.css" />
+	<title>Product CRUD</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
-   <div id="container">
-      <div class="dualbrand">
-         <img src="resources/gfx/dualbrand_logo.png" />
-      </div>
-      <div id="content">
-         <ui:insert name="content">
-                    [Template content will be inserted here]
-         </ui:insert>
-      </div>
-      <div id="aside">
-         <p>Learn more about JBoss Enterprise Application Platform 6.</p>
-         <ul>
-            <li><a
-               href="http://red.ht/jbeap-6-docs">Documentation</a></li>
-            <li><a href="http://red.ht/jbeap-6">Product Information</a></li>
-         </ul>
-         <p>Learn more about JBoss AS 7.</p>
-         <ul>
-            <li><a
-               href="https://docs.jboss.org/author/display/AS7/Getting+Started+Developing+Applications+Guide">Getting Started Developing Applications Guide</a></li>
-            <li><a href="http://jboss.org/jbossas">Community Project Information</a></li>
-         </ul>            
-      </div>
-      <div id="footer">
-         <p>
-            This project was generated from a Maven archetype from
-            JBoss.<br />
-         </p>
-      </div>
-   </div>
+	<div id="container">
+		<div id="header" style="display: block;">
+			<div style="display: inline-block;">
+				<h1>Home Page</h1>
+			</div>
+			<div style="float: right; display: inline-block; width: 45%;"> 
+				<h:panelGrid rendered="#{!loginController.isUserLogged()}">
+					<h:form>
+						<h:panelGrid columns="2">
+							<h:outputLabel for="useremail">Email:</h:outputLabel>
+							<h:inputText id="useremail" value="#{loginController.user.email}" required="true" />
+							<h:outputLabel for="userpwd">Password:</h:outputLabel>
+							<h:inputSecret id="userpwd" value="#{loginController.user.password}" required="true"/>
+						</h:panelGrid>
+						<div style="text-align: center;">
+							<h:commandButton type="submit" action="#{loginController.loginUser()}" value="Login"/>
+						</div>
+					</h:form>
+					<h:link value="Register" outcome="/users/registerUser"/>
+				</h:panelGrid>
+				<h:panelGrid rendered="#{loginController.isUserLogged()}">
+					<div style="display: block;">
+						<div style="display: inline-block;">
+							Hello #{loginController.getUserLoggedEmail()}
+						</div>
+						<div style="display: inline-block;">
+							<h:form>
+								<h:commandLink value="Logout" action="#{loginController.logoutUser()}"/>
+							</h:form> 
+						</div>
+					</div>
+				</h:panelGrid>
+			</div>
+		</div>
+		
+		<div id="content">
+			<ui:insert name="content">
+			</ui:insert>
+		</div>
+
+		<div id="footer">
+			<p>gonzalomelov@gmail.com</p>
+		</div>
+	</div>
 </h:body>
 </html>
