@@ -6,11 +6,10 @@
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
-		<h1>Home Page</h1>
-		
-		<h:link value="Add Product" outcome="/products/productAdd"/> <br/>
-		<h:link value="Product List" outcome="/products/productList"/>
-
+		<h:panelGrid rendered="#{loginController.isUserLogged()}">
+			<h:link value="Add Product" outcome="/products/productAdd"/> <br/>
+			<h:link value="Product List" outcome="/products/productList"/>	
+		</h:panelGrid>
 	</ui:define>
 	
 </ui:composition>

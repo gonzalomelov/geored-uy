@@ -1,3 +1,7 @@
 --insert into product (id,name,description) values (1,'Coca-Cola','Beverage');
 --insert into product (id,name,description) values (2,'Amor','Preservatives');
 --insert into product (id,name,description) values (3,'La Gijonesa','Sidra');
+--select nextval ('hibernate_sequence');
+--insert into users (id,email,password,name,lastname) values (1,'gonzalomelov@gmail.com', 'U8060T', 'Gonzalo', 'Melo');
+--select nextval ('hibernate_sequence');
+--insert into users (id,email,password,name,lastname) values (2,'trakinas_17@hotmail.com', 'mago852', 'Ezequiel', 'Melo');

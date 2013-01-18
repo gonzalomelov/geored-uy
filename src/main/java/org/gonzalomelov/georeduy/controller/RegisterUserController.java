@@ -10,16 +10,16 @@ import org.gonzalomelov.georeduy.service.UserBean;
 
 @ManagedBean
 @RequestScoped
-public class LoginController {
+public class RegisterUserController {
 	
-	private User user = new User();
+	public User user = new User();
 	
 	@ManagedProperty(value="#{userManagementController}")
-	private UserManagementController userManagementController;
+	public UserManagementController userManagementController;
 	
 	@EJB
-	private UserBean userBean;
-		
+	public UserBean userBean;
+
 	//Getters and Setters
 	public User getUser() {
 		return user;
@@ -38,26 +38,9 @@ public class LoginController {
 	}
 
 	//Functions
-	public String loginUser(){
-		if (userBean.validateUser(user)){
-			userManagementController.loginUser(user);
-		} else {
-			//throw Exception
-		}
-		return "/index";
+	public String registerUser(){
+		userBean.registerUser(user);
+		userManagementController.loginUser(user);
+		return "/index"; 
 	}
-	
-	public String logoutUser(){
-		userManagementController.logoutUser();
-		return "/index";
-	}
-	
-	public boolean isUserLogged(){
-		return userManagementController.isUserLogged();
-	}
-	
-	public String getUserLoggedEmail(){
-		return this.userManagementController.getUser().getEmail();
-	}
-	
 }

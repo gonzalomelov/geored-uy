@@ -10,12 +10,42 @@
 </h:head>
 <h:body>
 	<div id="container">
-		<div id="header">
+		<div id="header" style="display: block;">
+			<div style="display: inline-block;">
+				<h1>Home Page</h1>
+			</div>
+			<div style="float: right; display: inline-block; width: 45%;"> 
+				<h:panelGrid rendered="#{!loginController.isUserLogged()}">
+					<h:form>
+						<h:panelGrid columns="2">
+							<h:outputLabel for="useremail">Email:</h:outputLabel>
+							<h:inputText id="useremail" value="#{loginController.user.email}" required="true" />
+							<h:outputLabel for="userpwd">Password:</h:outputLabel>
+							<h:inputSecret id="userpwd" value="#{loginController.user.password}" required="true"/>
+						</h:panelGrid>
+						<div style="text-align: center;">
+							<h:commandButton type="submit" action="#{loginController.loginUser()}" value="Login"/>
+						</div>
+					</h:form>
+					<h:link value="Register" outcome="/users/registerUser"/>
+				</h:panelGrid>
+				<h:panelGrid rendered="#{loginController.isUserLogged()}">
+					<div style="display: block;">
+						<div style="display: inline-block;">
+							Hello #{loginController.getUserLoggedEmail()}
+						</div>
+						<div style="display: inline-block;">
+							<h:form>
+								<h:commandLink value="Logout" action="#{loginController.logoutUser()}"/>
+							</h:form> 
+						</div>
+					</div>
+				</h:panelGrid>
+			</div>
 		</div>
 		
 		<div id="content">
 			<ui:insert name="content">
-                    [Template content will be inserted here]
 			</ui:insert>
 		</div>
 
