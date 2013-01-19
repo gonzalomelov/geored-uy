@@ -1,3 +1,0 @@
---insert into product (id,name,description) values (1,'Coca-Cola','Beverage');
---insert into product (id,name,description) values (2,'Amor','Preservatives');
---insert into product (id,name,description) values (3,'La Gijonesa','Sidra');

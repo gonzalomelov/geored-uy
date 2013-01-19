@@ -1,14 +1,14 @@
-package org.gonzalomelov.georeduy.model;
+package org.gonzalomelov.georeduy.dal.model;
+
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
-public class Product {
+public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

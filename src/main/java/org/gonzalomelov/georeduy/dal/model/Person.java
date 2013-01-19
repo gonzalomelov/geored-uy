@@ -1,32 +1,40 @@
-package org.gonzalomelov.georeduy.model;
+package org.gonzalomelov.georeduy.dal.model;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="users")
-public class User {
+public class Person implements Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private Long id;
-	@NotNull
+	
+	@NotBlank
 	@Column(unique=true)
+	@Email
 	private String email;
-	@NotNull
+	
+	@NotBlank
+	@Length(min=4,max=25)
 	private String password;
 	
+	@NotBlank
 	private String name;
 	
+	@NotBlank
 	private String lastname;
 	
-	public User(){}
+	public Person(){}
 	
-	public User(String email, String password, String name, String lastname){
+	public Person(String email, String password, String name, String lastname){
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -79,10 +87,10 @@ public class User {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof User)) {
+		if (!(obj instanceof Person)) {
 			return false;
 		}
-		User other = (User) obj;
+		Person other = (Person) obj;
 		if (email == null) {
 			if (other.email != null) {
 				return false;

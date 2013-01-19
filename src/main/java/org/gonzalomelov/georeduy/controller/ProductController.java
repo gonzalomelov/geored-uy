@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.model.Product;
+import org.gonzalomelov.georeduy.dal.model.Product;
 import org.gonzalomelov.georeduy.service.ProductBean;
 
 @ManagedBean
