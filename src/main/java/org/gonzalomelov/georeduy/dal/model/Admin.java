@@ -1,5 +1,19 @@
 package org.gonzalomelov.georeduy.dal.model;
 
-public class Admin extends Person {
+import javax.persistence.Entity;
 
+@Entity
+public class Admin extends Person {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 3884212903390410358L;
+
+	public Admin(){
+		super();
+	}
+	
+	public Admin(String email, String password, String name, String lastname){
+		super(email, password, name, lastname);
+	}
 }

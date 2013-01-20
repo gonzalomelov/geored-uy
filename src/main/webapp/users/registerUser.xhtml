@@ -9,14 +9,18 @@
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel for="email">Email:</h:outputLabel>
-				<h:inputText id="email" value="#{registerUserController.user.email}"></h:inputText>
+				<h:inputText id="email" value="#{personRegisterController.personRegister.person.email}"></h:inputText>
 				<h:outputLabel for="password">Password:</h:outputLabel>
-				<h:inputSecret id="password" value="#{registerUserController.user.password}"></h:inputSecret>
+				<h:inputSecret id="password" value="#{personRegisterController.personRegister.person.password}"></h:inputSecret>
 				<h:outputLabel for="name">Name:</h:outputLabel>
-				<h:inputText id="name" value="#{registerUserController.user.name}"></h:inputText>
+				<h:inputText id="name" value="#{personRegisterController.personRegister.person.name}"></h:inputText>
 				<h:outputLabel for="lastname">Lastname:</h:outputLabel>
-				<h:inputText id="lastname" value="#{registerUserController.user.lastname}"></h:inputText>
-				<h:commandButton value="Register" action="#{registerUserController.registerUser()}" />
+				<h:inputText id="lastname" value="#{personRegisterController.personRegister.person.lastname}"></h:inputText>
+				<h:outputLabel for="personType">User Type:</h:outputLabel>
+				<h:selectOneMenu id="personType" value="#{personRegisterController.personRegister.personType}">
+					<f:selectItems value="#{personTypeRegister.getPersonTypes()}" var="type" itemValue="#{g}" itemLabel="#{g.name}" />
+				</h:selectOneMenu>
+				<h:commandButton value="Register" action="#{personRegisterController.registerPerson()}" />
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

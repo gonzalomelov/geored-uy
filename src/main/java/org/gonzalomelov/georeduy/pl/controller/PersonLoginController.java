@@ -1,18 +1,18 @@
-package org.gonzalomelov.georeduy.controller;
+package org.gonzalomelov.georeduy.pl.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import org.gonzalomelov.georeduy.bll.service.PersonBean;
 import org.gonzalomelov.georeduy.dal.model.Person;
-import org.gonzalomelov.georeduy.service.PersonBean;
 
 @ManagedBean
 @RequestScoped
 public class PersonLoginController {
 	
-	private Person person = null; 
+	private Person person = new Person();
 	
 	@ManagedProperty(value="#{personSessionManagementController}")
 	private PersonSessionManagementController personSessionManagementController;
@@ -29,11 +29,11 @@ public class PersonLoginController {
 		this.person = person;
 	}
 
-	public PersonSessionManagementController getPersonManagementController() {
+	public PersonSessionManagementController getPersonSessionManagementController() {
 		return personSessionManagementController;
 	}
 
-	public void setPersonManagementController(PersonSessionManagementController personSessionManagementController) {
+	public void setPersonSessionManagementController(PersonSessionManagementController personSessionManagementController) {
 		this.personSessionManagementController = personSessionManagementController;
 	}
 
@@ -53,12 +53,12 @@ public class PersonLoginController {
 		return "/index";
 	}
 	
-	public boolean isPersonLogged(){
-		return personSessionManagementController.isPersonLogged();
-	}
-	
-	public String getPersonLoggedEmail(){
-		return personSessionManagementController.getPerson().getEmail();
-	}
+//	public boolean isPersonLogged(){
+//		return personSessionManagementController.isPersonLogged();
+//	}
+//	
+//	public String getPersonLoggedEmail(){
+//		return personSessionManagementController.getPerson().getEmail();
+//	}
 	
 }

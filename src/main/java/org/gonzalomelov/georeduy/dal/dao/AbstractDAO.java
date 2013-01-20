@@ -22,7 +22,6 @@ public abstract class AbstractDAO<T> implements GenericDAO<T>{
 		Type t = getClass().getGenericSuperclass();
 		ParameterizedType pt = (ParameterizedType) t;
 		type = (Class) pt.getActualTypeArguments()[0];
-		System.out.println(type.toString());
 	}
 	
 	@Override

@@ -13,6 +13,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Person implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -3910258006369491463L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

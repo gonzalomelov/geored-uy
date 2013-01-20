@@ -6,9 +6,9 @@
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
-		<h:panelGrid rendered="#{loginController.isUserLogged()}">
+		<h:panelGrid rendered="#{displayController.displayProductCRUD()}">
 			<h:link value="Add Product" outcome="/products/productAdd"/> <br/>
-			<h:link value="Product List" outcome="/products/productList"/>	
+			<h:link value="Product List" outcome="/products/productList"/>
 		</h:panelGrid>
 	</ui:define>
 	

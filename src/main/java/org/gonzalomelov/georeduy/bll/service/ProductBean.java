@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.service;
+package org.gonzalomelov.georeduy.bll.service;
 
 import java.util.ArrayList;
 import java.util.List;

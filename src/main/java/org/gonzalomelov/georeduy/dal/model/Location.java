@@ -9,10 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.vividsolutions.jts.geom.Point;
 
 @Entity
 public class Location implements Serializable {
@@ -24,9 +21,9 @@ public class Location implements Serializable {
 	@Column(unique=true)
 	private String name;
 	
-	@NotNull
-	@Type(type="org.hibernate.spatial.GeometryType")
-	private Point geom;
+//	@NotNull
+//	@Type(type="org.hibernate.spatial.GeometryType")
+//	private Geometry geom;
 	
 	@ManyToOne
 	@NotNull
@@ -49,13 +46,13 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-	public Point getGeom() {
-		return geom;
-	}
-
-	public void setGeom(Point geom) {
-		this.geom = geom;
-	}
+//	public Geometry getGeom() {
+//		return geom;
+//	}
+//
+//	public void setGeom(Geometry geom) {
+//		this.geom = geom;
+//	}
 
 	public Company getCompany() {
 		return company;

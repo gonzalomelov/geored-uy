@@ -15,28 +15,28 @@
 				<h1>Home Page</h1>
 			</div>
 			<div style="float: right; display: inline-block; width: 45%;"> 
-				<h:panelGrid rendered="#{!loginController.isUserLogged()}">
+				<h:panelGrid rendered="#{!personSessionManagementController.isPersonLogged()}">
 					<h:form>
 						<h:panelGrid columns="2">
 							<h:outputLabel for="useremail">Email:</h:outputLabel>
-							<h:inputText id="useremail" value="#{loginController.user.email}" required="true" />
+							<h:inputText id="useremail" value="#{personLoginController.person.email}" required="true" />
 							<h:outputLabel for="userpwd">Password:</h:outputLabel>
-							<h:inputSecret id="userpwd" value="#{loginController.user.password}" required="true"/>
+							<h:inputSecret id="userpwd" value="#{personLoginController.person.password}" required="true"/>
 						</h:panelGrid>
 						<div style="text-align: center;">
-							<h:commandButton type="submit" action="#{loginController.loginUser()}" value="Login"/>
+							<h:commandButton type="submit" action="#{personLoginController.loginPerson()}" value="Login"/>
 						</div>
 					</h:form>
 					<h:link value="Register" outcome="/users/registerUser"/>
 				</h:panelGrid>
-				<h:panelGrid rendered="#{loginController.isUserLogged()}">
+				<h:panelGrid rendered="#{personSessionManagementController.isPersonLogged()}">
 					<div style="display: block;">
 						<div style="display: inline-block;">
-							Hello #{loginController.getUserLoggedEmail()}
+							Hello  <h:outputText value="#{personSessionManagementController.person.email}" />
 						</div>
 						<div style="display: inline-block;">
 							<h:form>
-								<h:commandLink value="Logout" action="#{loginController.logoutUser()}"/>
+								<h:commandLink value="Logout" action="#{personLoginController.logoutPerson()}"/>
 							</h:form> 
 						</div>
 					</div>

@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.controller;
+package org.gonzalomelov.georeduy.pl.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.gonzalomelov.georeduy.bll.service.ProductBean;
 import org.gonzalomelov.georeduy.dal.model.Product;
-import org.gonzalomelov.georeduy.service.ProductBean;
 
 @ManagedBean
 @RequestScoped

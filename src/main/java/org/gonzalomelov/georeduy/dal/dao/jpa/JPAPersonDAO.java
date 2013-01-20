@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.dal.dao;
+package org.gonzalomelov.georeduy.dal.dao.jpa;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.gonzalomelov.georeduy.dal.dao.AbstractDAO;
+import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.Person;
 import org.gonzalomelov.georeduy.dal.model.Person_;
 
@@ -30,4 +31,5 @@ public class JPAPersonDAO extends AbstractDAO<Person> implements PersonDAO {
 		
 		return person;
 	}
+	
 }
