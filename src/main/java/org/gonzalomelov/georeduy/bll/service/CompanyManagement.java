@@ -5,8 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import org.gonzalomelov.georeduy.bll.interfaces.CompanyManagementService;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;

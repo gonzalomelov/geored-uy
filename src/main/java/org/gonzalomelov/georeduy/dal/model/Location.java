@@ -13,6 +13,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Location implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 2984706492450727628L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

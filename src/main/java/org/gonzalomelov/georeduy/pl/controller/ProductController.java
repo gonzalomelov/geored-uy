@@ -9,7 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.gonzalomelov.georeduy.bll.interfaces.ProductManagementService;
-import org.gonzalomelov.georeduy.bll.service.ProductManagement;
 import org.gonzalomelov.georeduy.dal.model.Product;
 
 @ManagedBean

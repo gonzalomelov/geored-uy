@@ -11,6 +11,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Image implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -6129917358769786439L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

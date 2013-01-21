@@ -6,7 +6,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
-import org.gonzalomelov.georeduy.dal.dao.jpa.JPAPersonDAO;
 import org.gonzalomelov.georeduy.dal.model.Person;
 import org.gonzalomelov.georeduy.dal.model.User;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -15,9 +14,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
