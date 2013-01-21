@@ -8,27 +8,26 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.ProductBean;
+import org.gonzalomelov.georeduy.bll.interfaces.ProductManagementService;
+import org.gonzalomelov.georeduy.bll.service.ProductManagement;
 import org.gonzalomelov.georeduy.dal.model.Product;
 
 @ManagedBean
 @RequestScoped
 public class ProductController {
 	
-	@EJB
-	private ProductBean productBean;
+	@EJB(name="productManagement")
+	private ProductManagementService productManagementService;
 	
 	private Product product = new Product();
 	
 	private List<Product> products = new ArrayList<Product>();
 	
-	public ProductController() {
-		
-	}
+	public ProductController() {}
 	
 	@PostConstruct
 	public void init(){
-		products = productBean.getProducts();
+		products = productManagementService.getProducts();
 	}
 
 	public Product getProduct() {
@@ -55,8 +54,8 @@ public class ProductController {
 	 * Functions
 	 */
 	public String addProduct(){
-		productBean.addProduct(product);
-		return "/products/productList";
+		productManagementService.addProduct(product);
+		return "/product/listProducts";
 	}
 
 

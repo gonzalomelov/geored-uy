@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h1>Add Company</h1>
+		<h:form>
+			<h:panelGrid>
+				<h:outputLabel for="name">Name:</h:outputLabel>
+				<h:inputText id="name" value="#{companyManagementController.companyCreate.company.name}" required="true"/>
+				<h:outputLabel for="adminEmail">Administrator Email:</h:outputLabel>
+				<h:inputText id="adminEmail" value="#{companyManagementController.companyCreate.adminCompanyEmail}"/>
+			</h:panelGrid>
+			<h:commandButton value="Create Company" type="submit" action="#{companyManagementController.createCompany()}" />
+		</h:form>
+		<br/>
+		<h:link value="Home Page" outcome="/index"/>
+		
+	</ui:define>
+
+</ui:composition>
+</html>

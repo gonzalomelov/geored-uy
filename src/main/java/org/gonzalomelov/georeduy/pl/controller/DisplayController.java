@@ -4,6 +4,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import org.gonzalomelov.georeduy.dal.model.AdminCompany;
+import org.gonzalomelov.georeduy.dal.model.SuperAdmin;
 import org.gonzalomelov.georeduy.dal.model.User;
 
 @ManagedBean
@@ -24,8 +26,18 @@ public class DisplayController {
 	}
 
 	//Functions
-	public boolean displayProductCRUD(){
+	public boolean isUserLogged(){
 		return personSessionManagementController.isPersonLogged() &&
 			personSessionManagementController.getPerson() instanceof User;
+	}
+	
+	public boolean isSuperAdminLogged(){
+		return personSessionManagementController.isPersonLogged() &&
+			personSessionManagementController.getPerson() instanceof SuperAdmin;
+	}
+	
+	public boolean isAdminCompanyLogged(){
+		return personSessionManagementController.isPersonLogged() &&
+			personSessionManagementController.getPerson() instanceof AdminCompany;
 	}
 }

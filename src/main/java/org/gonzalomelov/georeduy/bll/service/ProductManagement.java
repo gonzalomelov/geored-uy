@@ -9,10 +9,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.gonzalomelov.georeduy.bll.interfaces.ProductManagementService;
 import org.gonzalomelov.georeduy.dal.model.Product;
 
-@Stateless
-public class ProductBean {
+@Stateless(name="productManagement")
+public class ProductManagement implements ProductManagementService {
 	
 	@PersistenceContext
 	private EntityManager em;

@@ -6,10 +6,14 @@
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
-		<h:panelGrid rendered="#{displayController.displayProductCRUD()}">
-			<h:link value="Add Product" outcome="/products/productAdd"/> <br/>
-			<h:link value="Product List" outcome="/products/productList"/>
+		<h:panelGrid rendered="#{displayController.isUserLogged()}">
+			<h:link value="Add Product" outcome="/product/addProduct"/> <br/>
+			<h:link value="Product List" outcome="/product/listProducts"/>
+		</h:panelGrid>
+		<h:panelGrid rendered="#{displayController.isSuperAdminLogged()}">
+			<h:link value="Add Company" outcome="/company/addCompany"/> <br/>
+			<h:link value="Companies" outcome="/company/listCompanies"/>
 		</h:panelGrid>
 	</ui:define>
-	
+		
 </ui:composition>

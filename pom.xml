@@ -146,6 +146,17 @@
         
         <!-- /POSTGIS -->
 
+		<!-- STRING GENERATOR FOR PASSWORDS -->
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<scope>provided</scope>
+			<version>3.1</version>
+		</dependency>
+		
+		<!-- /STRING GENERATOR FOR PASSWORDS -->
+
 		<!-- TEST -->
 
         <dependency>

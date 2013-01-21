@@ -18,15 +18,20 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Company implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1937063341367098363L;
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue 
 	private Long id;
 	
 	@NotBlank
 	@Column(unique=true)
-	private String name;
+	private String name; 
 	
-	@NotBlank
+	@NotNull
 	private String description;
 	
 	//@NotNull
