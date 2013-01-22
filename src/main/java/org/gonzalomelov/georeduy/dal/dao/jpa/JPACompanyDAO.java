@@ -6,12 +6,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.gonzalomelov.georeduy.dal.dao.AbstractDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.model.Company;
 import org.gonzalomelov.georeduy.dal.model.Company_;
 
-public class JPACompanyDAO extends AbstractDAO<Company> implements CompanyDAO{
+public class JPACompanyDAO extends JPAAbstractDAO<Company> implements CompanyDAO{
 	public Company findByName(String name){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Company> query = builder.createQuery(Company.class);

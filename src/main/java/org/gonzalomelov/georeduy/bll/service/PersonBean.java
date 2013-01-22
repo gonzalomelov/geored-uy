@@ -12,8 +12,17 @@ public class PersonBean {
 	@Inject
 	private PersonDAO personDAO;
 	
-	public void registerPerson(Person person){
-        personDAO.insert(person);
+	public Person registerPerson(Person person){
+        try {
+        	return personDAO.insert(person);
+        }
+        catch(Exception e){
+        	return null;
+        }
+        finally {
+        	
+        }
+		
 	}
 	
 	/**

@@ -7,14 +7,25 @@
 
 	<ui:define name="content">
 		<h1>Add Company</h1>
-		<h:form>
-			<h:panelGrid>
+		<h:form id="createCompanyForm">
+			<h:messages />
+			
+			<ui:param name="controller" value="#{companyManagementSuperAdminController}" /> 
+			<ui:param name="model" value="#{companyManagementSuperAdminController.companyManagementSuperAdminModel}" />
+			
+			<h:panelGrid columns="3">
+				
 				<h:outputLabel for="name">Name:</h:outputLabel>
-				<h:inputText id="name" value="#{companyManagementController.companyCreate.company.name}" required="true"/>
+				<h:inputText id="name" value="#{model.company.name}" required="true"/>
+				<h:message style="color: red;" for="name" id="nameError"/>
+				
 				<h:outputLabel for="adminEmail">Administrator Email:</h:outputLabel>
-				<h:inputText id="adminEmail" value="#{companyManagementController.companyCreate.adminCompanyEmail}"/>
+				<h:inputText id="adminEmail" value="#{model.adminCompanyEmail}"/>
+				<h:message for="adminEmail" id="adminEmailError" />
+				
+				<h:inputHidden id="description" value="#{model.company.description}" />
 			</h:panelGrid>
-			<h:commandButton value="Create Company" type="submit" action="#{companyManagementController.createCompany()}" />
+			<h:commandButton value="Create Company" type="submit" action="#{controller.createCompany()}" />
 		</h:form>
 		<br/>
 		<h:link value="Home Page" outcome="/index"/>

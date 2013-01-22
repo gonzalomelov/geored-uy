@@ -9,18 +9,27 @@
 	<ui:define name="content">
 		<h1>List Companies</h1>
 		
-		<h:dataTable var="_company" value="#{companyManagementController.listCompanies()}" styleClass="simpletablestyle">
+		<h:messages />
+		
+		<ui:param name="controller" value="#{companyManagementSuperAdminController}" /> 
+		<ui:param name="model" value="#{companyManagementSuperAdminController.companyManagementSuperAdminModel}" />
+		
+		<h:dataTable var="company" value="#{controller.listCompanies()}" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
-				#{_company.id}
+				#{company.id}
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
-				#{_company.name}
+				#{company.name}
 			</h:column>
 			<h:column>
 				<f:facet name="header">Description</f:facet>
-				#{_company.description}
+				#{company.description}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Admin Email</f:facet>
+				#{company.adminCompany.email}
 			</h:column>
 		</h:dataTable>
 		
