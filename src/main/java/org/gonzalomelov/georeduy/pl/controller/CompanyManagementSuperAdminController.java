@@ -7,7 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.validation.ConstraintViolationException;
 
 import org.gonzalomelov.georeduy.bll.interfaces.company.CompanyManagementSuperAdminServices;
 import org.gonzalomelov.georeduy.dal.model.Company;
@@ -19,7 +18,7 @@ public class CompanyManagementSuperAdminController {
  
 	private CompanyManagementSuperAdminModel companyManagementSuperAdminModel = new CompanyManagementSuperAdminModel();
 	
-	@EJB(name="companyManagement")
+	@EJB(name="companyManagementSuperAdminServices")
 	private CompanyManagementSuperAdminServices companyManagementSuperAdminServices;
 	
 	
@@ -64,15 +63,12 @@ public class CompanyManagementSuperAdminController {
 		}
 	}
 	
-	/*
-	public String updateCompany(){
-		companyManagementServices.updateCompany(companyManagementSuperAdminModel.getCompany());
-		return "/companies/listCompanies";
-	}
-	*/
-	
 	public String deleteCompany(){
 		companyManagementSuperAdminServices.deleteCompany(companyManagementSuperAdminModel.getCompany().getId());
 		return "/companies/listCompanies";
+	}
+	
+	public Company showCompany(String name){
+		return companyManagementSuperAdminServices.findCompanyByName(name);
 	}
 }
