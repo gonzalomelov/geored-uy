@@ -2,7 +2,7 @@ package org.gonzalomelov.georeduy.pl.model;
 
 import org.gonzalomelov.georeduy.dal.model.Company;
 
-public class CompanyCreate {
+public class CompanyManagementSuperAdminModel {
 	private Company company = new Company();
 	private String adminCompanyEmail;
 	
