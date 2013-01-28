@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.person;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -52,13 +52,5 @@ public class PersonLoginController {
 		personSessionManagementController.logoutPerson();
 		return "/index";
 	}
-	
-//	public boolean isPersonLogged(){
-//		return personSessionManagementController.isPersonLogged();
-//	}
-//	
-//	public String getPersonLoggedEmail(){
-//		return personSessionManagementController.getPerson().getEmail();
-//	}
 	
 }

@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.person;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,14 +10,16 @@ import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Person;
 import org.gonzalomelov.georeduy.dal.model.SuperAdmin;
 import org.gonzalomelov.georeduy.dal.model.User;
-import org.gonzalomelov.georeduy.pl.model.PersonRegister;
+import org.gonzalomelov.georeduy.pl.model.person.PersonType;
 
 @ManagedBean
 @RequestScoped
 public class PersonRegisterController {
 	
-	private PersonRegister personRegister = new PersonRegister();
-	
+	private Person person = new Person();
+
+	private PersonType personType;
+
 	@ManagedProperty(value="#{personSessionManagementController}")
 	private PersonSessionManagementController personSessionManagementController;
 	
@@ -25,14 +27,22 @@ public class PersonRegisterController {
 	private PersonBean personBean;
 
 	//Getters and Setters
-	public PersonRegister getPersonRegister() {
-		return personRegister;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setPersonRegister(PersonRegister personRegister) {
-		this.personRegister = personRegister;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
+	public PersonType getPersonType() {
+		return personType;
+	}
+
+	public void setPersonType(PersonType personType) {
+		this.personType = personType;
+	}
+	
 	public PersonSessionManagementController getPersonSessionManagementController() {
 		return personSessionManagementController;
 	}
@@ -44,23 +54,20 @@ public class PersonRegisterController {
 
 	//Functions
 	public String registerPerson(){
-		Person person = null;
+		Person registerPerson = null;
 		
 		//Registered depend of person type
-		switch (personRegister.getPersonType()) {
+		switch (personType) {
 		case ADMINCOMPANY:
-			person = new AdminCompany(personRegister.getPerson().getEmail(),personRegister.getPerson().getPassword(),
-					personRegister.getPerson().getName(),personRegister.getPerson().getLastname());
+			registerPerson = new AdminCompany(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		case USER:
-			person = new User(personRegister.getPerson().getEmail(),personRegister.getPerson().getPassword(),
-					personRegister.getPerson().getName(),personRegister.getPerson().getLastname());
+			registerPerson = new User(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		case SUPERADMIN:
-			person = new SuperAdmin(personRegister.getPerson().getEmail(),personRegister.getPerson().getPassword(),
-					personRegister.getPerson().getName(),personRegister.getPerson().getLastname());
+			registerPerson = new SuperAdmin(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		default:
@@ -68,9 +75,13 @@ public class PersonRegisterController {
 		}
 		
 		//Registry
-		personBean.registerPerson(person);
+		personBean.registerPerson(registerPerson);
 		//Loggin
-		personSessionManagementController.loginPerson(person);
+		personSessionManagementController.loginPerson(registerPerson);
 		return "/index";
+	}
+	
+	public PersonType[] getPersonTypes(){
+		return PersonType.values();
 	}
 }

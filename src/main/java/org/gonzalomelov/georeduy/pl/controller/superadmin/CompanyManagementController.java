@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.superadmin;
 
 import java.util.List;
 
@@ -10,25 +10,34 @@ import javax.faces.context.FacesContext;
 
 import org.gonzalomelov.georeduy.bll.interfaces.superadmin.CompanyManagementServices;
 import org.gonzalomelov.georeduy.dal.model.Company;
-import org.gonzalomelov.georeduy.pl.model.CompanyManagementSuperAdminModel;
 
 @ManagedBean
 @RequestScoped
-public class CompanyManagementSuperAdminController {
+public class CompanyManagementController {
  
-	private CompanyManagementSuperAdminModel companyManagementSuperAdminModel = new CompanyManagementSuperAdminModel();
+	private Company company = new Company();
+	
+	private String adminCompanyEmail;
 	
 	@EJB(name="companyManagementServices")
 	private CompanyManagementServices companyManagementServices;
 	
 	
 	//Getters and Setters
-	public CompanyManagementSuperAdminModel getCompanyManagementSuperAdminModel() {
-		return companyManagementSuperAdminModel;
+	public Company getCompany() {
+		return company;
 	}
-
-	public void setCompanyManagementSuperAdminModel(CompanyManagementSuperAdminModel companyManagementSuperAdminModel) {
-		this.companyManagementSuperAdminModel = companyManagementSuperAdminModel;
+	
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
+	public String getAdminCompanyEmail() {
+		return adminCompanyEmail;
+	}
+	
+	public void setAdminCompanyEmail(String adminCompanyEmail) {
+		this.adminCompanyEmail = adminCompanyEmail;
 	}
 
 	public CompanyManagementServices getCompanyManagementSuperAdminServices() {
@@ -42,7 +51,7 @@ public class CompanyManagementSuperAdminController {
 	//Functions
 	public String createCompany(){
 		try {
-			companyManagementServices.createCompany(companyManagementSuperAdminModel);
+			companyManagementServices.createCompany(company, adminCompanyEmail);
 			return "/company/listCompanies.xhtml";
 		}
 		catch(Exception e){
@@ -64,11 +73,20 @@ public class CompanyManagementSuperAdminController {
 	}
 	
 	public String deleteCompany(){
-		companyManagementServices.deleteCompany(companyManagementSuperAdminModel.getCompany().getId());
-		return "/companies/listCompanies";
+		try {
+			companyManagementServices.deleteCompany(company.getId());
+			return "/companies/listCompanies";
+		}catch (Exception e){
+			return "/index";
+		}
+		
 	}
 	
 	public Company showCompany(String name){
-		return companyManagementServices.findCompanyByName(name);
+		try {
+			return companyManagementServices.findCompanyByName(name);
+		}catch (Exception e){
+			return null;
+		}
 	}
 }
