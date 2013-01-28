@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.superadmin;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.gonzalomelov.georeduy.pl.model.CompanyManagementSuperAdminModel;
 
 @ManagedBean
 @RequestScoped
-public class CompanyManagementSuperAdminController {
+public class CompanyManagementController {
  
 	private CompanyManagementSuperAdminModel companyManagementSuperAdminModel = new CompanyManagementSuperAdminModel();
 	
@@ -42,7 +42,7 @@ public class CompanyManagementSuperAdminController {
 	//Functions
 	public String createCompany(){
 		try {
-			companyManagementServices.createCompany(companyManagementSuperAdminModel);
+			companyManagementServices.createCompany(companyManagementSuperAdminModel.getCompany(), companyManagementSuperAdminModel.getAdminCompanyEmail());
 			return "/company/listCompanies.xhtml";
 		}
 		catch(Exception e){
@@ -64,11 +64,22 @@ public class CompanyManagementSuperAdminController {
 	}
 	
 	public String deleteCompany(){
-		companyManagementServices.deleteCompany(companyManagementSuperAdminModel.getCompany().getId());
-		return "/companies/listCompanies";
+		try {
+			companyManagementServices.deleteCompany(companyManagementSuperAdminModel.getCompany().getId());
+			return "/companies/listCompanies";
+		}
+		catch (Exception e){
+			return "/index";
+		}
 	}
 	
 	public Company showCompany(String name){
-		return companyManagementServices.findCompanyByName(name);
+		try {
+			return companyManagementServices.findCompanyByName(name);
+		}
+		catch(Exception e){
+			return null;
+		}
+		
 	}
 }

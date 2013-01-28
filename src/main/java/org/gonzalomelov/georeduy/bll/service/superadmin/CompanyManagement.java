@@ -21,7 +21,6 @@ import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Company;
-import org.gonzalomelov.georeduy.pl.model.CompanyManagementSuperAdminModel;
 
 
 @Stateless(name="companyManagementSuperAdminServices")
@@ -31,52 +30,18 @@ public class CompanyManagement implements CompanyManagementServices {
 	
 	@Inject
 	private PersonDAO personDAO;
-	
-	private void sendEmail(String email, String password){
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
-		
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("gonzalomelov","$_U-8_0-6_0-T_$");
-					}
-				});
-		
-		try {
-			 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("gonzalomelov@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("gonzalomelov@gmail.com"));
-			message.setSubject("Register your Company");
-			message.setText("Dear " + email + "," +
-					"\n\n Login into http://localhost:8080/geored-uy with the password " + password + "and set your company information"+
-					"\n\n\n\n"+
-					"Cheers,\n geored-uy team");
- 
-			Transport.send(message);
- 
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
+
+	//Implementations
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public Company createCompany(CompanyManagementSuperAdminModel companyManagementSuperAdminModel) throws Exception {
+	public Company createCompany(Company company, String adminCompanyEmail) throws Exception {
 		
-		String companyName = companyManagementSuperAdminModel.getCompany().getName();
+		String companyName = company.getName();
 		//company.name already registered
 		if(companyDAO.findByName(companyName) != null) {
 			throw new Exception("Company name already registered");
 		}
 		
-		String adminCompanyEmail = companyManagementSuperAdminModel.getAdminCompanyEmail();
 		//adminCompanyEmail already registered
 		if(personDAO.findByEmail(adminCompanyEmail) != null) {
 			throw new Exception("Email already registered");
@@ -87,8 +52,6 @@ public class CompanyManagement implements CompanyManagementServices {
 			AdminCompany adminCompany = new AdminCompany(adminCompanyEmail, adminCompanyPassword,"","");
 			
 			adminCompany = (AdminCompany) personDAO.insert(adminCompany);
-			
-			Company company = companyManagementSuperAdminModel.getCompany();
 			
 			company.setAdminCompany(adminCompany);
 			adminCompany.getCompanies().put(company.getName(), company);
@@ -153,5 +116,39 @@ public class CompanyManagement implements CompanyManagementServices {
 			
 		}
 	}
-	
+
+	//Utils
+	private void sendEmail(String email, String password){
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
+		
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication("gonzalomelov","$_U-8_0-6_0-T_$");
+					}
+				});
+		
+		try {
+			 
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("gonzalomelov@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse("gonzalomelov@gmail.com"));
+			message.setSubject("Register your Company");
+			message.setText("Dear " + email + "," +
+					"\n\n Login into http://localhost:8080/geored-uy with the password " + password + "and set your company information"+
+					"\n\n\n\n"+
+					"Cheers,\n geored-uy team");
+ 
+			Transport.send(message);
+ 
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

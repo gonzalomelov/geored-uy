@@ -1,9 +1,12 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.person;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Person;
+import org.gonzalomelov.georeduy.dal.model.SuperAdmin;
+import org.gonzalomelov.georeduy.dal.model.User;
 
 @ManagedBean(name="personSessionManagementController")
 @SessionScoped
@@ -32,4 +35,15 @@ public class PersonSessionManagementController {
 		return person != null;
 	}
 	
+	public boolean isUserLogged(){
+		return isPersonLogged() && person instanceof User;
+	}
+	
+	public boolean isSuperAdminLogged(){
+		return isPersonLogged() && person instanceof SuperAdmin;
+	}
+	
+	public boolean isAdminCompanyLogged(){
+		return isPersonLogged() && person instanceof AdminCompany;
+	}
 }

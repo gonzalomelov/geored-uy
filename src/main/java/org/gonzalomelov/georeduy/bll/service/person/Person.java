@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.bll.service.user;
+package org.gonzalomelov.georeduy.bll.service.person;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -7,7 +7,7 @@ import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.Person;
 
 @Stateless
-public class PersonBean {
+public class Person {
 	
 	@Inject
 	private PersonDAO personDAO;

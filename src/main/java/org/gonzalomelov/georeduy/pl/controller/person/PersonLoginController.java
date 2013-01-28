@@ -1,11 +1,11 @@
-package org.gonzalomelov.georeduy.pl.controller;
+package org.gonzalomelov.georeduy.pl.controller.person;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.user.PersonBean;
+import org.gonzalomelov.georeduy.bll.service.person.Person;
 import org.gonzalomelov.georeduy.dal.model.Person;
 
 @ManagedBean
@@ -18,7 +18,7 @@ public class PersonLoginController {
 	private PersonSessionManagementController personSessionManagementController;
 	
 	@EJB
-	private PersonBean personBean;
+	private Person personBean;
 		
 	//Getters and Setters
 	public Person getPerson() {
@@ -52,13 +52,4 @@ public class PersonLoginController {
 		personSessionManagementController.logoutPerson();
 		return "/index";
 	}
-	
-//	public boolean isPersonLogged(){
-//		return personSessionManagementController.isPersonLogged();
-//	}
-//	
-//	public String getPersonLoggedEmail(){
-//		return personSessionManagementController.getPerson().getEmail();
-//	}
-	
 }
