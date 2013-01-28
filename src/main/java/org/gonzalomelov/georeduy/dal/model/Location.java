@@ -1,15 +1,21 @@
 package org.gonzalomelov.georeduy.dal.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 @Entity
 public class Location implements Serializable {
@@ -26,13 +32,16 @@ public class Location implements Serializable {
 	@Column(unique=true)
 	private String name;
 	
-//	@NotNull
-//	@Type(type="org.hibernate.spatial.GeometryType")
-//	private Geometry geom;
+	@NotNull
+	@Type(type="org.hibernate.spatial.GeometryType")
+	private Geometry geom;
 	
 	@ManyToOne
 	@NotNull
 	private Company company;
+	
+	@OneToMany(mappedBy="location")
+	private List<Offer> offers = new ArrayList<Offer>();
 
 	//Getters and Setters
 	public Long getId() {
@@ -51,13 +60,13 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-//	public Geometry getGeom() {
-//		return geom;
-//	}
-//
-//	public void setGeom(Geometry geom) {
-//		this.geom = geom;
-//	}
+	public Geometry getGeom() {
+		return geom;
+	}
+
+	public void setGeom(Geometry geom) {
+		this.geom = geom;
+	}
 
 	public Company getCompany() {
 		return company;

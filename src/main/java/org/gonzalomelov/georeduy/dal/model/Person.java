@@ -38,6 +38,8 @@ public class Person implements Serializable {
 	@NotNull
 	private String lastname;
 	
+	private boolean isLogged = false;
+	
 	public Person(){}
 	
 	public Person(String email, String password, String name, String lastname){
@@ -83,6 +85,14 @@ public class Person implements Serializable {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
+	}
+
+	public boolean isLogged() {
+		return isLogged;
+	}
+
+	public void setLogged(boolean isLogged) {
+		this.isLogged = isLogged;
 	}
 
 	@Override

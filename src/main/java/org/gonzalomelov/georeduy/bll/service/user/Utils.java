@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.bll.service;
+package org.gonzalomelov.georeduy.bll.service.user;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

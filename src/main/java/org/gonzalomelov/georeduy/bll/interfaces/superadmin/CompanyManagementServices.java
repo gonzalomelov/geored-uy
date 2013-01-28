@@ -1,11 +1,10 @@
-package org.gonzalomelov.georeduy.bll.interfaces.company;
+package org.gonzalomelov.georeduy.bll.interfaces.superadmin;
 
 import java.util.List;
 
 import org.gonzalomelov.georeduy.dal.model.Company;
-import org.gonzalomelov.georeduy.pl.model.CompanyManagementSuperAdminModel;
 
-public interface CompanyManagementSuperAdminServices {
+public interface CompanyManagementServices {
 	
 	/**
 	 * Creates a company and assigns it to a company
@@ -14,7 +13,7 @@ public interface CompanyManagementSuperAdminServices {
 	 * @param company to persist
 	 * @return the persisted company
 	 */
-	public Company createCompany(CompanyManagementSuperAdminModel company) throws Exception;
+	public Company createCompany(Company company, String adminCompanyEmail) throws Exception;
 	
 	/**
 	 * Deletes a company, its locations and offers.
@@ -22,8 +21,7 @@ public interface CompanyManagementSuperAdminServices {
 	 *  
 	 * @param companyId of the company to be deleted
 	 */
-	public void deleteCompany(Long companyId);
-	
+	public void deleteCompany(Long companyId) throws Exception;
 	
 	/**
 	 * Returns all the registered companies
@@ -33,11 +31,10 @@ public interface CompanyManagementSuperAdminServices {
 	public List<Company> findAllCompanies() throws Exception;
 	
 	/**
-	 * Returns the company with the specified name
+	 * Return the company and its information
 	 * 
-	 * @param name company's name
-	 * @return The company with the name 'name' 
+	 * @param name Company name
+	 * @return company with its offers and locations
 	 */
-	public Company findCompanyByName(String name);
-
+	public Company findCompanyByName(String name) throws Exception;
 }

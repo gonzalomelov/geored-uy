@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.bll.service;
+package org.gonzalomelov.georeduy.bll.service.superadmin;
 
 import java.util.List;
 import java.util.Properties;
@@ -15,7 +15,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.gonzalomelov.georeduy.bll.interfaces.company.CompanyManagementSuperAdminServices;
+import org.gonzalomelov.georeduy.bll.interfaces.superadmin.CompanyManagementServices;
+import org.gonzalomelov.georeduy.bll.service.user.Utils;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
@@ -24,7 +25,7 @@ import org.gonzalomelov.georeduy.pl.model.CompanyManagementSuperAdminModel;
 
 
 @Stateless(name="companyManagementSuperAdminServices")
-public class CompanyManagementSuperAdmin implements CompanyManagementSuperAdminServices {
+public class CompanyManagement implements CompanyManagementServices {
 	@Inject
 	private CompanyDAO companyDAO;
 	
@@ -96,7 +97,7 @@ public class CompanyManagementSuperAdmin implements CompanyManagementSuperAdminS
 			
 //			Thread sendMailThread = new Thread(new Runnable(){
 //				public void run(){
-//					CompanyManagementSuperAdmin.sendEmail();
+//					CompanyManagement.sendEmail();
 //				}
 //			}, "sendMailThread");
 //		
