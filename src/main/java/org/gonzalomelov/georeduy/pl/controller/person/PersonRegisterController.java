@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.user.PersonBean;
+import org.gonzalomelov.georeduy.bll.service.person.PersonBean;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Person;
 import org.gonzalomelov.georeduy.dal.model.SuperAdmin;
@@ -56,7 +56,7 @@ public class PersonRegisterController {
 	public String registerPerson(){
 		Person registerPerson = null;
 		
-		//Registered depend of person type
+		//Registered depend of personBean type
 		switch (personType) {
 		case ADMINCOMPANY:
 			registerPerson = new AdminCompany(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
@@ -78,6 +78,7 @@ public class PersonRegisterController {
 		personBean.registerPerson(registerPerson);
 		//Loggin
 		personSessionManagementController.loginPerson(registerPerson);
+		
 		return "/index";
 	}
 	

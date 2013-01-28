@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.user.PersonBean;
+import org.gonzalomelov.georeduy.bll.service.person.PersonBean;
 import org.gonzalomelov.georeduy.dal.model.Person;
 
 @ManagedBean

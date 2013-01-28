@@ -1,13 +1,10 @@
 geored-uy
 =========
 
+Social network that integrates various technologies like:
+JEE, JSF, Richfaces, Rest Web Services, EJB, Hibernate, Hibernate Spatial, JPA, Postgresql, Postgis.
+Also includes Arquillian Tests, UML design, Design Patters, MVC, ...
 
-Postgis Initialization
-----------------------
-Run in terminal as postgres user:
-For production
-$ psql -d georeduyDBTest -f /usr/share/postgresql/contrib/postgis-2.0/postgis.sql
-$ psql -d georeduyDB -f /usr/share/postgresql/contrib/postgis-2.0/spatial_ref_sys.sql
-For testing
-$ psql -d georeduyTestDB -f /usr/share/postgresql/contrib/postgis-2.0/postgis.sql
-$ psql -d georeduyTestDB -f /usr/share/postgresql/contrib/postgis-2.0/spatial_ref_sys.sql
+Author
+======
+gonzalomelov@gmail.com

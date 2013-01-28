@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.bll.service.user;
+package org.gonzalomelov.georeduy.bll.service.person;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ public class PersonBean {
 	
 	/**
 	 * 
-	 * @param person: Person object with email and password setted
+	 * @param person: PersonBean object with email and password setted
 	 * @return Null if its an invalid person, or the person if it is valid
 	 */
 	public Person validatePerson(Person person){

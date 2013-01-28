@@ -118,7 +118,7 @@ public class CompanyManagement implements CompanyManagementServices {
 		}
 	}
 
-	//Auxiliar Functions
+	//Aux Functions
 	private void sendEmail(String email, String password){
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");

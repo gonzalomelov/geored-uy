@@ -46,5 +46,4 @@ public class PersonSessionManagementController {
 	public boolean isAdminCompanyLogged(){
 		return isPersonLogged() && person instanceof AdminCompany;
 	}
-	
 }
