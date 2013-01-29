@@ -42,36 +42,25 @@ public class CompanyManagement implements CompanyServices {
 		catch (Exception e){
 			throw e;
 		}
-		finally {
-			
-		}
 	}
 
 	@Override
 	public List<Company> findAllCompanies() throws Exception {
-		
 		try {
 			return companyDAO.findAll();
 		}
 		catch (Exception e){
 			throw e;
 		}
-		finally {
-			
-		}
 	}
 
 	@Override
 	public Company findCompanyByName(String name){
-		
 		try {
 			return companyDAO.findByName(name);
 		}
 		catch (Exception e){
 			return null;
-		}
-		finally {
-			
 		}
 	}
 
@@ -90,14 +79,12 @@ public class CompanyManagement implements CompanyServices {
 		}
 		
 		try {
+			//create and insert the adminCompany in the db
 			String adminCompanyPassword = UtilsUser.generatePassword();
 			AdminCompany adminCompany = new AdminCompany(adminCompanyEmail, adminCompanyPassword,"","");
-			
 			adminCompany = (AdminCompany) personDAO.insert(adminCompany);
-			
 			company.setAdminCompany(adminCompany);
 			adminCompany.getCompanies().put(company.getName(), company);
-			
 			company = companyDAO.insert(company);
 			
 			//Send the email in background
@@ -119,32 +106,23 @@ public class CompanyManagement implements CompanyServices {
 	}
 
 	@Override
-	public void deleteCompany(Long companyId){
+	public void deleteCompany(Long companyId) throws Exception {
 		try {
 			companyDAO.delete(companyId);
 		}
 		catch (Exception e){
-			
+			throw e;
 		}
-		finally {
-			
-		}
-		
 	}
 
 	@Override
 	public Company updateCompany(Company company) throws Exception {
-		
 		Company updateCompany = companyDAO.findByPrimaryKey(company.getId());
-		
 		if (updateCompany == null){
 			throw new Exception("Company not registered");
 		}
-		
 		updateCompany = companyDAO.update(company);
-		
 		return updateCompany;
-		
 	}
 	
 	//#############

@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jboss.bom.version>1.0.0.Final</jboss.bom.version>
+        <org.richfaces.bom.version>4.2.3.Final</org.richfaces.bom.version>
     </properties>
 
     <dependencyManagement>
@@ -30,6 +31,13 @@
                 <version>${jboss.bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${org.richfaces.bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
@@ -90,6 +98,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- RICHFACES -->
+        
+        <dependency>
+	        <groupId>org.richfaces.ui</groupId>
+	        <artifactId>richfaces-components-ui</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.richfaces.core</groupId>
+	        <artifactId>richfaces-core-impl</artifactId>
+	    </dependency>
+        
+	    <!-- /RICHFACES -->
+	    
 		<!-- HIBERNATE -->
 	
         <dependency>

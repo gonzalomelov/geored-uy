@@ -6,6 +6,13 @@ import org.gonzalomelov.georeduy.dal.model.Company;
 
 public interface CompanyServices {
 	//Common
+	
+	/**
+	 * Return the company and its information
+	 * 
+	 * @param id Company id
+	 * @return company with its offers and locations
+	 */
 	public Company findCompanyById(Long id) throws Exception;
 	
 	/**
@@ -42,5 +49,11 @@ public interface CompanyServices {
 	public void deleteCompany(Long companyId) throws Exception;
 	
 	//AdminCompany
+	
+	/**
+	 * Updates the company description and logo
+	 *  
+	 * @param company Company to be updated
+	 */
 	public Company updateCompany(Company company) throws Exception;
 }

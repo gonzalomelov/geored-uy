@@ -3,6 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
@@ -11,8 +12,16 @@
 	
 		<h:form>
 			<h:panelGrid columns="2">
-				<h:outputLabel for="name">Name: </h:outputLabel>
-				<h:inputText id="name" value="#{}" />
+				<h:outputLabel for="name">Name:</h:outputLabel>
+				<h:inputText id="name" value="#{model.company.name}" />
+				<h:outputLabel for="description">Description:</h:outputLabel>
+				<h:inputTextArea id="description" value="#{model.company.description}" />
+				<h:outputLabel for="imageUpload">Logo:</h:outputLabel>
+				<rich:fileUpload
+					id="imageUpload" fileUploadListener="#{controller.fileUploaded()}"
+					maxFilesQuantity="1" acceptedTypes="jpg,png,jpeg" immediateUpload="false">
+				</rich:fileUpload>
+				
 			</h:panelGrid>
 		</h:form>		
 	</ui:define>
