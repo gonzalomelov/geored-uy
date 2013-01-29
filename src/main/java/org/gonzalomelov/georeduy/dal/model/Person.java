@@ -38,7 +38,7 @@ public class Person implements Serializable {
 	@NotNull
 	private String lastname;
 	
-	private boolean isLogged = false;
+	private Boolean isLogged = false;
 	
 	public Person(){}
 	

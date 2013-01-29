@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.person.PersonBean;
+import org.gonzalomelov.georeduy.bll.interfaces.PersonServices;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Person;
 import org.gonzalomelov.georeduy.dal.model.SuperAdmin;
@@ -23,8 +23,8 @@ public class PersonRegisterController {
 	@ManagedProperty(value="#{personSessionManagementController}")
 	private PersonSessionManagementController personSessionManagementController;
 	
-	@EJB
-	private PersonBean personBean;
+	@EJB(name="personServices")
+	private PersonServices personServices;
 
 	//Getters and Setters
 	public Person getPerson() {
@@ -74,12 +74,18 @@ public class PersonRegisterController {
 			return "/index";
 		}
 		
-		//Registry
-		personBean.registerPerson(registerPerson);
-		//Loggin
-		personSessionManagementController.loginPerson(registerPerson);
-		
-		return "/index";
+		try {
+			//Registry
+			personServices.registerPerson(registerPerson);
+			//Loggin
+			personSessionManagementController.loginPerson(registerPerson);
+			
+			return "/index";
+		}
+		catch (Exception e){
+			//Message: e.getMessage()
+			return "/index";
+		}
 	}
 	
 	public PersonType[] getPersonTypes(){

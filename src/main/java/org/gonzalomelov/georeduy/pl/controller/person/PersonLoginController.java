@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.gonzalomelov.georeduy.bll.service.person.PersonBean;
+import org.gonzalomelov.georeduy.bll.interfaces.PersonServices;
 import org.gonzalomelov.georeduy.dal.model.Person;
 
 @ManagedBean
@@ -17,8 +17,8 @@ public class PersonLoginController {
 	@ManagedProperty(value="#{personSessionManagementController}")
 	private PersonSessionManagementController personSessionManagementController;
 	
-	@EJB
-	private PersonBean personBean;
+	@EJB(name="personServices")
+	private PersonServices personServices;
 		
 	//Getters and Setters
 	public Person getPerson() {
@@ -39,18 +39,33 @@ public class PersonLoginController {
 
 	//Functions
 	public String loginPerson(){
-		Person loggedPerson = personBean.validatePerson(person);
-		if (loggedPerson != null){ 
-			personSessionManagementController.loginPerson(loggedPerson);
-		} else {
-			//throw Exception
+		if (!personServices.validatePerson(person)) {
+			//Message: User Not Registered
+			return "/index";
 		}
-		return "/index";
+		
+		try {
+			Person loggedPerson = personServices.login(person);
+			personSessionManagementController.loginPerson(loggedPerson);
+			return "/index";
+		}
+		catch (Exception e){
+			//Message: e.getMessage();
+			return "/index";
+		}
 	}
 	
 	public String logoutPerson(){
-		personSessionManagementController.logoutPerson();
-		return "/index";
+		try {
+			Person loggedPerson = personSessionManagementController.getPerson();
+			personServices.logout(loggedPerson);
+			personSessionManagementController.logoutPerson();
+			return "/index";
+		}
+		catch (Exception e){
+			//Message: e.getMessage();
+			return "/index";
+		}
 	}
 	
 }

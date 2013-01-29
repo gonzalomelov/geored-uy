@@ -1,14 +1,14 @@
-package org.gonzalomelov.georeduy.bll.service.admincompany;
+package org.gonzalomelov.georeduy.bll.service;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
 
-import org.gonzalomelov.georeduy.bll.interfaces.admincompany.OfferManagementServices;
+import org.gonzalomelov.georeduy.bll.interfaces.OfferServices;
 import org.gonzalomelov.georeduy.dal.model.Offer;
 
-@Stateless(name="OfferManagementServices")
-public class OfferManagement implements OfferManagementServices {
+@Stateless(name="offerServices")
+public class OfferManagement implements OfferServices {
 
 	@Override
 	public Offer addOfferToLocation(Long companyId, Long locationId, Offer offer) {
@@ -55,5 +55,5 @@ public class OfferManagement implements OfferManagementServices {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

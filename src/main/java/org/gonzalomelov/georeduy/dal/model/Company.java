@@ -34,8 +34,8 @@ public class Company implements Serializable {
 	@NotNull
 	private String description;
 	
-	//@NotNull
-	//private Image logo;
+	@NotNull
+	private Image logo;
 	
 	@ManyToOne
 	@NotNull
@@ -72,13 +72,13 @@ public class Company implements Serializable {
 		this.description = description;
 	}
 
-//	public Image getLogo() {
-//		return logo;
-//	}
-//
-//	public void setLogo(Image logo) {
-//		this.logo = logo;
-//	}
+	public Image getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Image logo) {
+		this.logo = logo;
+	}
 
 	public AdminCompany getAdminCompany() {
 		return adminCompany;

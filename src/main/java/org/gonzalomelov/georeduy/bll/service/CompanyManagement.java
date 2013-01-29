@@ -1,4 +1,4 @@
-package org.gonzalomelov.georeduy.bll.service.superadmin;
+package org.gonzalomelov.georeduy.bll.service;
 
 import java.util.List;
 import java.util.Properties;
@@ -15,81 +15,38 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.gonzalomelov.georeduy.bll.interfaces.superadmin.CompanyManagementServices;
-import org.gonzalomelov.georeduy.bll.service.user.Utils;
+import org.gonzalomelov.georeduy.bll.interfaces.CompanyServices;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Company;
 
-
-@Stateless(name="companyManagementSuperAdminServices")
-public class CompanyManagement implements CompanyManagementServices {
+@Stateless(name="companyServices")
+public class CompanyManagement implements CompanyServices {
+	
 	@Inject
 	private CompanyDAO companyDAO;
 	
 	@Inject
 	private PersonDAO personDAO;
 	
+	//###############
 	//Implementations
+	//###############
 	
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public Company createCompany(Company company, String adminCompanyEmail) throws Exception {
-		
-		String companyName = company.getName();
-		//company.name already registered
-		if(companyDAO.findByName(companyName) != null) {
-			throw new Exception("Company name already registered");
-		}
-		
-		//adminCompanyEmail already registered
-		if(personDAO.findByEmail(adminCompanyEmail) != null) {
-			throw new Exception("Email already registered");
-		}
-		
+	public Company findCompanyById(Long id) throws Exception {
 		try {
-			String adminCompanyPassword = Utils.generatePassword();
-			AdminCompany adminCompany = new AdminCompany(adminCompanyEmail, adminCompanyPassword,"","");
-			
-			adminCompany = (AdminCompany) personDAO.insert(adminCompany);
-			
-			company.setAdminCompany(adminCompany);
-			adminCompany.getCompanies().put(company.getName(), company);
-			
-			company = companyDAO.insert(company);
-			
-//			Thread sendMailThread = new Thread(new Runnable(){
-//				public void run(){
-//					CompanyManagement.sendEmail();
-//				}
-//			}, "sendMailThread");
-//		
-//			sendMailThread.start();
-		
-			this.sendEmail(adminCompanyEmail, adminCompanyPassword);
-			
-			return company;
+			return companyDAO.findByPrimaryKey(id);
 		}
 		catch (Exception e){
 			throw e;
 		}
-	}
-	
-	@Override
-	public void deleteCompany(Long companyId){
-		try {
-			companyDAO.delete(companyId);
-		}
-		catch (Exception e){
-			
-		}
 		finally {
 			
 		}
-		
 	}
-	
+
 	@Override
 	public List<Company> findAllCompanies() throws Exception {
 		
@@ -103,7 +60,7 @@ public class CompanyManagement implements CompanyManagementServices {
 			
 		}
 	}
-	
+
 	@Override
 	public Company findCompanyByName(String name){
 		
@@ -118,8 +75,83 @@ public class CompanyManagement implements CompanyManagementServices {
 		}
 	}
 
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public Company createCompany(Company company, String adminCompanyEmail) throws Exception {
+		
+		//company.name already registered
+		if(companyDAO.findByName(company.getName()) != null) {
+			throw new Exception("Company name already registered");
+		}
+		
+		//adminCompanyEmail already registered
+		if(personDAO.findByEmail(adminCompanyEmail) != null) {
+			throw new Exception("Email already registered");
+		}
+		
+		try {
+			String adminCompanyPassword = UtilsUser.generatePassword();
+			AdminCompany adminCompany = new AdminCompany(adminCompanyEmail, adminCompanyPassword,"","");
+			
+			adminCompany = (AdminCompany) personDAO.insert(adminCompany);
+			
+			company.setAdminCompany(adminCompany);
+			adminCompany.getCompanies().put(company.getName(), company);
+			
+			company = companyDAO.insert(company);
+			
+			//Send the email in background
+			final String adminEmail = adminCompanyEmail;
+			final String adminPassword = adminCompanyPassword;
+			Thread sendMailThread = new Thread(new Runnable(){
+				public void run(){
+					CompanyManagement.sendEmail(adminEmail, adminPassword);
+				}
+			}, "sendMailThread");
+		
+			sendMailThread.start();
+			
+			return company;
+		}
+		catch (Exception e){
+			throw e;
+		}
+	}
+
+	@Override
+	public void deleteCompany(Long companyId){
+		try {
+			companyDAO.delete(companyId);
+		}
+		catch (Exception e){
+			
+		}
+		finally {
+			
+		}
+		
+	}
+
+	@Override
+	public Company updateCompany(Company company) throws Exception {
+		
+		Company updateCompany = companyDAO.findByPrimaryKey(company.getId());
+		
+		if (updateCompany == null){
+			throw new Exception("Company not registered");
+		}
+		
+		updateCompany = companyDAO.update(company);
+		
+		return updateCompany;
+		
+	}
+	
+	//#############
 	//Aux Functions
-	private void sendEmail(String email, String password){
+	//#############
+	
+	private static void sendEmail(String email, String password){
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -142,9 +174,9 @@ public class CompanyManagement implements CompanyManagementServices {
 					InternetAddress.parse("gonzalomelov@gmail.com"));
 			message.setSubject("Register your Company");
 			message.setText("Dear " + email + "," +
-					"\n\n Login into http://localhost:8080/geored-uy with the password " + password + "and set your company information"+
+					"\n\nLogin into http://localhost:8080/geored-uy with the password '" + password + "' and set your company information."+
 					"\n\n\n\n"+
-					"Cheers,\n geored-uy team");
+					"Cheers,\ngeored-uy team");
  
 			Transport.send(message);
  
@@ -152,4 +184,5 @@ public class CompanyManagement implements CompanyManagementServices {
 			throw new RuntimeException(e);
 		}
 	}
+
 }

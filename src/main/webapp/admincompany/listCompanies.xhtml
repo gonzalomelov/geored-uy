@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h1>List Companies</h1>
+		
+		<h:messages />
+		
+		<ui:param name="controller" value="#{companyManagementControllerAdminCompany}" /> 
+		
+		<h:dataTable var="company" value="#{controller.findAllCompanies()}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{company.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{company.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+				#{company.description}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Admin Email</f:facet>
+				#{company.adminCompany.email}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Edit Company</f:facet>
+				<h:link outcome="editCompany">
+					<h:graphicImage library="images" value="edit.png" />
+				</h:link>
+			</h:column>
+		</h:dataTable>
+		
+		<br/>
+		
+		<h:link value="Home Page" outcome="/index"/>
+				
+	</ui:define>
+
+</ui:composition>
+</html>

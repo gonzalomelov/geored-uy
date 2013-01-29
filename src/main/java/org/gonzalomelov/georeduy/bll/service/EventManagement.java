@@ -1,14 +1,14 @@
-package org.gonzalomelov.georeduy.bll.service.superadmin;
+package org.gonzalomelov.georeduy.bll.service;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
 
-import org.gonzalomelov.georeduy.bll.interfaces.superadmin.EventManagementServices;
+import org.gonzalomelov.georeduy.bll.interfaces.EventServices;
 import org.gonzalomelov.georeduy.dal.model.Event;
 
-@Stateless(name="EventManagementServices")
-public class EventManagement implements EventManagementServices {
+@Stateless(name="eventServices")
+public class EventManagement implements EventServices {
 
 	@Override
 	public Event createEvent(Long siteOfInterestId, Event event)
@@ -58,6 +58,5 @@ public class EventManagement implements EventManagementServices {
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 }

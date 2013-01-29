@@ -11,10 +11,10 @@
 		
 		<h:messages />
 		
-		<ui:param name="controller" value="#{companyManagementSuperAdminController}" /> 
-		<ui:param name="model" value="#{companyManagementSuperAdminController.companyManagementSuperAdminModel}" />
+		<ui:param name="controller" value="#{companyManagementControllerSuperAdmin}" /> 
+		<ui:param name="model" value="#{companyManagementControllerSuperAdmin.companyManagementModelSuperAdmin}" />
 		
-		<h:dataTable var="company" value="#{controller.listCompanies()}" styleClass="simpletablestyle">
+		<h:dataTable var="company" value="#{controller.findAllCompanies()}" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
 				#{company.id}
