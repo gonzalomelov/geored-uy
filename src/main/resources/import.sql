@@ -1,7 +1,4 @@
---insert into product (id,name,description) values (1,'Coca-Cola','Beverage');
---insert into product (id,name,description) values (2,'Amor','Preservatives');
---insert into product (id,name,description) values (3,'La Gijonesa','Sidra');
---select nextval ('hibernate_sequence');
---insert into users (id,email,password,name,lastname) values (1,'gonzalomelov@gmail.com', 'U8060T', 'Gonzalo', 'Melo');
---select nextval ('hibernate_sequence');
---insert into users (id,email,password,name,lastname) values (2,'trakinas_17@hotmail.com', 'mago852', 'Ezequiel', 'Melo');
+insert into person (dtype, id, email, islogged, lastname, name, password) values ('SuperAdmin', 1, 'a@a.com', false, 'a', 'a', 'password');
+insert into person (dtype, id, email, islogged, lastname, name, password) values ('AdminCompany', 2, 'b@b.com', false, 'b', 'b', 'password');
+insert into company (id, description, logo, name, admincompany_id) values (3, '', null, 'b1', 2);
+select setval('hibernate_sequence', 4);

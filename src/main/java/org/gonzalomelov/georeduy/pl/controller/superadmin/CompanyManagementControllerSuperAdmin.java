@@ -45,14 +45,11 @@ public class CompanyManagementControllerSuperAdmin {
 	public String createCompany(){
 		try {
 			companyServices.createCompany(companyManagementModelSuperAdmin.getCompany(), companyManagementModelSuperAdmin.getAdminCompanyEmail());
-			return "/company/listCompanies.xhtml";
+			return "/superadmin/listCompanies.xhtml";
 		}
 		catch(Exception e){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
 			return null;
-		}
-		finally{
-			System.out.println("Gonzalo");
 		}
 	}
 	

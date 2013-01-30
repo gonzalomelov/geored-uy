@@ -54,20 +54,19 @@ public class PersonRegisterController {
 
 	//Functions
 	public String registerPerson(){
-		Person registerPerson = null;
 		
 		//Registered depend of personBean type
 		switch (personType) {
 		case ADMINCOMPANY:
-			registerPerson = new AdminCompany(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
+			person = new AdminCompany(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		case USER:
-			registerPerson = new User(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
+			person = new User(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		case SUPERADMIN:
-			registerPerson = new SuperAdmin(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
+			person = new SuperAdmin(person.getEmail(),person.getPassword(), person.getName(),person.getLastname());
 			break;
 			
 		default:
@@ -76,9 +75,10 @@ public class PersonRegisterController {
 		
 		try {
 			//Registry
-			personServices.registerPerson(registerPerson);
+			Person registeredPerson = personServices.registerPerson(person);
 			//Loggin
-			personSessionManagementController.loginPerson(registerPerson);
+			personServices.login(registeredPerson);
+			personSessionManagementController.loginPerson(registeredPerson);
 			
 			return "/index";
 		}

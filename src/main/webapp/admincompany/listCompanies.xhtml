@@ -13,7 +13,7 @@
 		
 		<ui:param name="controller" value="#{companyManagementControllerAdminCompany}" /> 
 		
-		<h:dataTable var="company" value="#{controller.findAllCompanies()}" styleClass="simpletablestyle">
+		<h:dataTable var="company" value="#{controller.findAllCompaniesFromAdminCompany()}" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
 				#{company.id}
@@ -32,10 +32,13 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Edit Company</f:facet>
-				<h:commandLink value="" action="#{controller.editCompany}">
-					<f:param name="companyId" value="#{company.id}" />
-					<h:graphicImage library="images" value="edit.jpg" />
-				</h:commandLink>
+				<h:form >
+					<h:inputHidden id="companyId" value="#{company.id}" />
+					<h:commandLink type="submit" action="#{controller.editCompany}"> 
+						<h:graphicImage library="images" value="../resources/images/edit.jpg" />
+					</h:commandLink>
+				</h:form>
+				
 			</h:column>
 		</h:dataTable>
 		
