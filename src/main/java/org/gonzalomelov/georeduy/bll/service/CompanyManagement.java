@@ -55,15 +55,25 @@ public class CompanyManagement implements CompanyServices {
 	}
 
 	@Override
-	public Company findCompanyByName(String name){
+	public Company findCompanyByName(String name) throws Exception {
 		try {
 			return companyDAO.findByName(name);
 		}
 		catch (Exception e){
-			return null;
+			throw e;
 		}
 	}
 
+	@Override
+	public List<Company> findAllCompaniesByAdminCompanyId(Long adminCompanyId) throws Exception {
+		try {
+			return companyDAO.findByAdminCompanyId(adminCompanyId);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Company createCompany(Company company, String adminCompanyEmail) throws Exception {

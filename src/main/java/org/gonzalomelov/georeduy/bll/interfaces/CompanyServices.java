@@ -14,6 +14,14 @@ public interface CompanyServices {
 	 * @return company with its offers and locations
 	 */
 	public Company findCompanyById(Long id) throws Exception;
+
+	/**
+	 * Return the company and its information
+	 * 
+	 * @param name Company name
+	 * @return company with its offers and locations
+	 */
+	public Company findCompanyByName(String name) throws Exception;
 	
 	/**
 	 * Returns all the registered companies
@@ -23,12 +31,11 @@ public interface CompanyServices {
 	public List<Company> findAllCompanies() throws Exception;
 	
 	/**
-	 * Return the company and its information
+	 * Returns all the registered companies of a AdminCompany
 	 * 
-	 * @param name Company name
-	 * @return company with its offers and locations
+	 * @return List of the registered companies without locations and offers of a particular AdminCompany
 	 */
-	public Company findCompanyByName(String name) throws Exception;
+	public List<Company> findAllCompaniesByAdminCompanyId(Long adminCompanyId) throws Exception;
 	
 	//SuperAdmin
 	/**

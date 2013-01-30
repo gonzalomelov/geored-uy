@@ -6,9 +6,14 @@
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
-		<h:panelGrid rendered="#{personSessionManagementController.isSuperAdminLogged()}">
+		<ui:param name="controller" value="#{personSessionManagementController}" />
+		
+		<h:panelGrid rendered="#{controller.isSuperAdminLogged()}">
 			<h:link value="Add Company" outcome="/superadmin/addCompany"/> <br/>
 			<h:link value="Companies" outcome="/superadmin/listCompanies"/>
+		</h:panelGrid>
+		<h:panelGrid rendered="#{controller.isAdminCompanyLogged()}">
+			<h:link value="Companies" outcome="/admincompany/listCompanies" />
 		</h:panelGrid>
 	</ui:define>
 		

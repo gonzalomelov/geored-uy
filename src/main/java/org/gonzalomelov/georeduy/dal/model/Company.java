@@ -31,10 +31,8 @@ public class Company implements Serializable {
 	@Column(unique=true)
 	private String name; 
 	
-	@NotNull
 	private String description;
 	
-	@NotNull
 	private Image logo;
 	
 	@ManyToOne

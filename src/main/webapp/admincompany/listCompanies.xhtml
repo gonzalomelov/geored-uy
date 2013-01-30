@@ -32,9 +32,10 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Edit Company</f:facet>
-				<h:link outcome="editCompany">
+				<h:commandLink value="" action="#{controller.editCompany}">
+					<f:param name="companyId" value="#{company.id}" />
 					<h:graphicImage library="images" value="edit.jpg" />
-				</h:link>
+				</h:commandLink>
 			</h:column>
 		</h:dataTable>
 		
