@@ -2,7 +2,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets">	
+
 <h:head>
 	<title>Product CRUD</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,7 +18,7 @@
 			<div style="float: right; display: inline-block; width: 45%;"> 
 				<h:panelGrid rendered="#{!personSessionManagementController.isPersonLogged()}">
 					<h:form>
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="4">
 							<h:outputLabel for="useremail">Email:</h:outputLabel>
 							<h:inputText id="useremail" value="#{personLoginController.person.email}" required="true" />
 							<h:outputLabel for="userpwd">Password:</h:outputLabel>
@@ -27,19 +28,19 @@
 							<h:commandButton type="submit" action="#{personLoginController.loginPerson()}" value="Login"/>
 						</div>
 					</h:form>
-					<h:link value="Register" outcome="/users/registerUser"/>
+					<h:panelGrid columns="2">
+						<h:outputText value="Not registered?" />
+						<h:link value="Sign Up Now!!" outcome="/users/registerUser"/>						
+					</h:panelGrid>
 				</h:panelGrid>
-				<h:panelGrid rendered="#{personSessionManagementController.isPersonLogged()}">
-					<div style="display: block;">
-						<div style="display: inline-block;">
-							Hello  <h:outputText value="#{personSessionManagementController.person.email}" />
-						</div>
-						<div style="display: inline-block;">
-							<h:form>
-								<h:commandLink value="Logout" action="#{personLoginController.logoutPerson()}"/>
-							</h:form> 
-						</div>
-					</div>
+				
+				<h:panelGrid rendered="#{personSessionManagementController.isPersonLogged()}" columns="3">
+					<h:outputText value="Hello" />
+					<h:outputText value="#{personSessionManagementController.person.email}" />
+					<h:form>
+						<h:commandLink value="Logout" action="#{personLoginController.logoutPerson()}"/>
+					</h:form> 
+						
 				</h:panelGrid>
 			</div>
 		</div>

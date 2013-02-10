@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
 
 <ui:composition template="/WEB-INF/templates/default.xhtml">
 
@@ -11,39 +12,37 @@
 		
 		<h:messages />
 		
-		<ui:param name="controller" value="#{companyManagementControllerAdminCompany}" /> 
+		<ui:param name="controller" value="#{companyManagementControllerAdminCompany}" />
 		
-		<h:dataTable var="company" value="#{controller.findAllCompaniesFromAdminCompany()}" styleClass="simpletablestyle">
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-				#{company.id}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>
-				#{company.name}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Description</f:facet>
-				#{company.description}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Admin Email</f:facet>
-				#{company.adminCompany.email}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Edit Company</f:facet>
-				<h:form >
-					<h:inputHidden id="companyId" value="#{company.id}" />
-					<h:commandLink type="submit" action="#{controller.editCompany}"> 
-						<h:graphicImage library="images" value="../resources/images/edit.jpg" />
-					</h:commandLink>
-				</h:form>
-				
-			</h:column>
-		</h:dataTable>
+		<h:form>
+			<rich:dataTable var="company" value="#{controller.findAllCompaniesFromAdminCompany()}" styleClass="simpletablestyle">
+				<rich:column>
+					<f:facet name="header">Id</f:facet>
+					#{company.id}
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Name</f:facet>
+					#{company.name}
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Description</f:facet>
+					#{company.description}
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Admin Email</f:facet>
+					#{company.adminCompany.email}
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Edit Company</f:facet>
+					<h:link outcome="/admincompany/editCompany">
+						<f:param name="company" value="#{company.id}" />
+						<h:graphicImage library="images" value="../resources/images/edit.jpg" width="20px" height="20px" />					
+					</h:link>
+				</rich:column>
+			</rich:dataTable>
+		</h:form>
 		
 		<br/>
-		
 		<h:link value="Home Page" outcome="/index"/>
 				
 	</ui:define>

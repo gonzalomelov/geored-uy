@@ -127,11 +127,15 @@ public class CompanyManagement implements CompanyServices {
 
 	@Override
 	public Company updateCompany(Company company) throws Exception {
+//		Image im = company.getLogo();
+//		imageDAO.insert(im);
+		
 		Company updateCompany = companyDAO.findByPrimaryKey(company.getId());
 		if (updateCompany == null){
 			throw new Exception("Company not registered");
 		}
 		updateCompany = companyDAO.update(company);
+		
 		return updateCompany;
 	}
 	
@@ -152,7 +156,7 @@ public class CompanyManagement implements CompanyServices {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication("gonzalomelov","$_U-8_0-6_0-T_$");
 					}
-				});
+				}); 
 		
 		try {
 			 

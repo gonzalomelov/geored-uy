@@ -23,8 +23,10 @@
       <connection-url>jdbc:postgresql://localhost:5432/georeduyDB</connection-url>
       <driver>postgresql</driver>
       <security>
-         <user-name>postgres</user-name>
-         <password>postgres</password>
+<!--       	 <user-name>postgres</user-name> -->
+<!--          <password>postgres</password> -->
+         <user-name>gonza</user-name>
+         <password></password>
       </security>
    </datasource>
 </datasources>

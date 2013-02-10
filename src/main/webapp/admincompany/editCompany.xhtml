@@ -4,26 +4,47 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 	
 	<ui:define name="content">
+		
+		<f:metadata>
+			<f:viewParam name="company" value="#{companyManagementControllerAdminCompany.companyManagementModelAdminCompany.company}" converter="#{companyConverter}" />
+		</f:metadata>
+		
 		<ui:param name="controller" value="#{companyManagementControllerAdminCompany}" />
 		<ui:param name="model" value="#{companyManagementControllerAdminCompany.companyManagementModelAdminCompany}" />
 	
 		<h:form>
-			<h:panelGrid columns="2">
+			<h1>Company</h1>
+			<h:panelGrid columns="2"> 
 				<h:outputLabel for="name">Name:</h:outputLabel>
 				<h:inputText id="name" value="#{model.company.name}" />
 				<h:outputLabel for="description">Description:</h:outputLabel>
-				<h:inputTextArea id="description" value="#{model.company.description}" />
-				<h:outputLabel for="imageUpload">Logo:</h:outputLabel>
-				<rich:fileUpload
-					id="imageUpload" fileUploadListener="#{controller.fileUploaded()}"
-					maxFilesQuantity="1" acceptedTypes="jpg,png,jpeg" immediateUpload="false">
-				</rich:fileUpload>
-				
+				<h:inputTextarea id="description" value="#{model.company.description}" />
+			</h:panelGrid>	
+			
+			<h2>Logo</h2>
+			<rich:fileUpload id="imageUpload" fileUploadListener="#{controller.fileUploaded}"
+				maxFilesQuantity="1" acceptedTypes="jpg,png,jpeg" immediateUpload="false">
+			</rich:fileUpload>
+			<h:panelGrid columns="2">
+				<h:outputLabel for="imageName">Name:</h:outputLabel>
+				<h:inputText id="imageName" value="#{model.image.name}" />
+				<h:outputLabel for="imageDescription">Description:</h:outputLabel>
+				<h:inputText id="imageDescription" value="#{model.image.description}" />
 			</h:panelGrid>
-		</h:form>		
+			
+			<a4j:mediaOutput element="img"
+				cacheable="false"
+				session="false"
+				createContent="#{imageController.paint}"
+				value="#{company.id}"
+				mimeType="image/png" />
+			
+			<h:commandButton value="Update Company" type="submit" action="#{controller.updateCompany()}" />
+		</h:form>
 	</ui:define>
 	
 </ui:composition>
