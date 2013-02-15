@@ -44,7 +44,7 @@ public class Company implements Serializable {
 	@NotNull
 	private AdminCompany adminCompany;
 	
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
 	@MapKey(name="name")
 	@NotNull
 	private Map<String, Location> locations = new HashMap<String, Location>();

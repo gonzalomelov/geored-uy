@@ -18,33 +18,43 @@
 	
 		<h:form>
 			<h1>Company</h1>
-			<h:panelGrid columns="2"> 
+			<h:panelGrid columns="2" border="1">  
 				<h:outputLabel for="name">Name:</h:outputLabel>
 				<h:inputText id="name" value="#{model.company.name}" />
 				<h:outputLabel for="description">Description:</h:outputLabel>
 				<h:inputTextarea id="description" value="#{model.company.description}" />
 			</h:panelGrid>	
 			
-			<h2>Logo</h2>
-			<rich:fileUpload id="imageUpload" fileUploadListener="#{controller.fileUploaded}"
-				maxFilesQuantity="1" acceptedTypes="jpg,png,jpeg" immediateUpload="false">
-			</rich:fileUpload>
-			<h:panelGrid columns="2">
-				<h:outputLabel for="imageName">Name:</h:outputLabel>
-				<h:inputText id="imageName" value="#{model.image.name}" />
-				<h:outputLabel for="imageDescription">Description:</h:outputLabel>
-				<h:inputText id="imageDescription" value="#{model.image.description}" />
+			<h:panelGrid border="1">
+				<h2>Logo</h2>
+				<rich:fileUpload id="imageUpload" fileUploadListener="#{controller.fileUploaded}"
+					maxFilesQuantity="1" acceptedTypes="jpg,png,jpeg" immediateUpload="false">
+				</rich:fileUpload>
+				<h:panelGrid columns="2">
+					<h:outputLabel for="imageName">Name:</h:outputLabel>
+					<h:inputText id="imageName" value="#{model.image.name}" />
+					<h:outputLabel for="imageDescription">Description:</h:outputLabel>
+					<h:inputText id="imageDescription" value="#{model.image.description}" />
+				</h:panelGrid>
+				
+				<a4j:mediaOutput element="img"
+					cacheable="false"
+					session="false"
+					createContent="#{imageController.paint}"
+					value="#{model.company.logo.id}"
+					mimeType="image/png" />
 			</h:panelGrid>
-			
-			<a4j:mediaOutput element="img"
-				cacheable="false"
-				session="false"
-				createContent="#{imageController.paint}"
-				value="#{company.id}"
-				mimeType="image/png" />
 			
 			<h:commandButton value="Update Company" type="submit" action="#{controller.updateCompany()}" />
 		</h:form>
+		
+		<h:panelGrid>
+			<h:link value="Locations" outcome="/admincompany/locations">
+				<f:param name="companyId" value="#{model.company.id}" />
+			</h:link>
+		</h:panelGrid>
+		
+		<h:link value="Home Page" outcome="/index"/>
 	</ui:define>
 	
 </ui:composition>

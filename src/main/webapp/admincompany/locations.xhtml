@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/templates/default.xhtml">
+	
+	<ui:define name="content">
+		
+		<ui:param name="controller" value="#{locationManagementControllerAdminCompany}" />
+		<ui:param name="model" value="#{locationManagementControllerAdminCompany.locationManagementModelAdminCompany}" />
+		<ui:param name="companyId" value="#{request.getParameter('companyId')}" />
+		
+		<h1>Locations: #{companyId}</h1>
+		
+		<h:dataTable value="#{controller.findAllLocationsFromCompany(model.companyId)}" var="location">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{location.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{location.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Point</f:facet>
+				#{location.geom}
+			</h:column>
+<!-- 			<h:column> -->
+<!-- 				<f:facet name="header">Edit</f:facet> -->
+<!-- 				<h:link value="" outcome=""/> -->
+<!-- 			</h:column> -->
+		</h:dataTable>
+		<h:panelGrid>
+			<h:inputHidden id="companyIdAux" value="#{companyId}" />
+			<h:form id="addLocationForm">
+				<h:panelGrid columns="2">
+					<h:outputLabel for="name" value="Name"/>
+					<h:inputText id="name" value="#{model.name}" />
+					
+					<h:outputLabel for="coordX" value="X"/>
+					<h:inputText id="coordX" value="#{model.coordX}" />
+					
+					<h:outputLabel for="coordY" value="Y"/>
+					<h:inputText id="coordY" value="#{model.coordY}" />
+					
+					<h:inputHidden id="companyId" value="#{model.companyId}" />
+					
+				</h:panelGrid>
+				<h:commandButton action="#{controller.addLocation}" value="Add Location" />
+			</h:form>
+		</h:panelGrid>
+		
+		<h:outputScript library="js" name="mapa.js" target="head" />
+		
+		<script type="text/javascript"
+			src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBYqzqUBKiCV2ArY3ixdv5_FUU6SsTUVU4&amp;sensor=false">
+	    </script>
+		
+		<div id="map_canvas" style="width: 500px; height: 500px;"></div>
+		
+		<h:link value="Home Page" outcome="/index"/>
+		
+	</ui:define>
+	
+</ui:composition>

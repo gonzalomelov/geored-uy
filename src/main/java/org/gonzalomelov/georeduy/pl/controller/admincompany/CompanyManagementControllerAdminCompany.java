@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.gonzalomelov.georeduy.bll.interfaces.CompanyServices;
 import org.gonzalomelov.georeduy.dal.model.Company;
@@ -16,7 +16,7 @@ import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class CompanyManagementControllerAdminCompany {
 	
 	@ManagedProperty(value="#{personSessionManagementController}")

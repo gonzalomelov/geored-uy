@@ -113,6 +113,18 @@
 	    
 		<!-- HIBERNATE -->
 	
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-core</artifactId> -->
+<!-- 			<version>4.2.0.CR1</version> -->
+<!-- 		</dependency> -->
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-entitymanager</artifactId> -->
+<!-- 			<version>4.2.0.CR1</version> -->
+<!-- 		</dependency> -->
+	
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
@@ -136,34 +148,52 @@
 		<!-- HIBERNATE SPATIAL -->
 
 		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>4.0-M1</version>
+        </dependency>
+
+		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial</artifactId>
-			<version>4.0-M1</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.0.0.Final</version>
+		</dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.0.0.Final</version>
+        </dependency>
+
+        <!-- the postgresql driver -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>8.4-701.jdbc3</version>
+        </dependency> 
+
+		<dependency>
+		  <groupId>org.postgis</groupId>
+		  <artifactId>postgis-jdbc</artifactId>
+		  <version>1.5.8</version>
 		</dependency>
 		
 		<!-- /HIBERNATE SPATIAL -->
 		
 		<!-- POSTGIS -->
 		
-		<dependency>
-            <groupId>org.postgis</groupId>
-            <artifactId>postgis-jdbc</artifactId>
-            <version>${hibernate-spatial.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>postgis-jdbc</artifactId>
-                    <groupId>org.postgis</groupId>
-                </exclusion>
-            </exclusions> 
-        </dependency>
-    
-        <dependency>
-            <groupId>org.postgis</groupId>
-            <artifactId>postgis-jdbc</artifactId>
-            <version>2.1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/postgis-jdbc-2.1.0SVN.jar</systemPath>
-        </dependency>
+<!-- 		 <dependency> -->
+<!--             <groupId>postgresql</groupId> -->
+<!--             <artifactId>postgresql</artifactId> -->
+<!--             <version>9.1-901-1.jdbc4</version> -->
+<!--         </dependency> -->
+		
+<!-- 		<dependency> -->
+<!-- 		  <groupId>org.postgis</groupId> -->
+<!-- 		  <artifactId>postgis-jdbc</artifactId> -->
+<!-- 		  <version>2.0.2SVN</version> -->
+<!-- 		  <version>1.5.8</version> -->
+<!-- 		</dependency> -->
         
         <!-- /POSTGIS -->
 
@@ -270,6 +300,21 @@
     	<repository>
 			<id>Hibernate Spatial repo</id>
 			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+		<repository>
+            <id>JBOSS</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+		<repository>
+		    <id>repo</id>
+		    <releases>
+		        <enabled>true</enabled>
+		        <checksumPolicy>ignore</checksumPolicy>
+		    </releases>
+		    <snapshots>
+		        <enabled>false</enabled>
+		    </snapshots>
+		    <url>file://${project.basedir}/repo</url>
 		</repository>
     </repositories>
     
