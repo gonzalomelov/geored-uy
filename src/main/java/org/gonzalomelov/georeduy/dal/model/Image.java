@@ -24,7 +24,7 @@ public class Image implements Serializable {
 	@NotEmpty
 	private byte[] image;
 	
-	private String nombre; 
+	private String name; 
 	
 	private String description;
 
@@ -45,12 +45,12 @@ public class Image implements Serializable {
 		this.image = image;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
