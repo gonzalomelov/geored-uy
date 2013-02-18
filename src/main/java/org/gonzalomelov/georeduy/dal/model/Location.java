@@ -11,12 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.vividsolutions.jts.geom.Point;
 
+@XmlRootElement(name = "location")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Location implements Serializable {
 	/**
@@ -24,26 +32,16 @@ public class Location implements Serializable {
 	 */
 	private static final long serialVersionUID = 2984706492450727628L;
 
-	@Id
-	@GeneratedValue
 	private Long id;
-	
-	@NotBlank
-	@Column(unique=true)
 	private String name;
-	
-	@Column(columnDefinition="Geometry")
-	@Type(type="org.hibernate.spatial.GeometryType")
 	private Point geom;
-	
-	@ManyToOne
-	@NotNull
 	private Company company;
-	
-	@OneToMany(mappedBy="location")
 	private List<Offer> offers = new ArrayList<Offer>();
 
 	//Getters and Setters
+	@XmlAttribute(name = "id")
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -52,6 +50,9 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 
+	@XmlElement(name = "name")
+	@NotBlank
+	@Column(unique=true)
 	public String getName() {
 		return name;
 	}
@@ -59,7 +60,9 @@ public class Location implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@XmlElement(name = "geom")
+	@Type(type="org.hibernate.spatial.GeometryType")
 	public Point getGeom() {
 		return geom;
 	}
@@ -68,11 +71,25 @@ public class Location implements Serializable {
 		this.geom = geom;
 	}
 
+	@XmlElement(name = "company")
+	@ManyToOne
+	@NotNull
 	public Company getCompany() {
 		return company;
 	}
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	
+	@XmlElementWrapper(name = "offers")
+	@XmlElement(name = "offer")
+	@OneToMany(mappedBy="location")
+	public List<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
 }

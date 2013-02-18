@@ -15,10 +15,17 @@ import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
+@XmlRootElement(name = "company")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Company implements Serializable {
 	/**
@@ -26,31 +33,17 @@ public class Company implements Serializable {
 	 */
 	private static final long serialVersionUID = 1937063341367098363L;
 
-	@Id
-	@GeneratedValue 
 	private Long id;
-	
-	@NotBlank
-	@Column(unique=true)
 	private String name; 
-	
 	private String description;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="image_id")
 	private Image logo;
-	
-	@ManyToOne
-	@NotNull
 	private AdminCompany adminCompany;
-	
-	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
-	@MapKey(name="name")
-	@NotNull
 	private Map<String, Location> locations = new HashMap<String, Location>();
 
-	
 	//Getters and Setters
+	@XmlAttribute(name = "id")
+	@Id
+	@GeneratedValue 
 	public Long getId() {
 		return id;
 	}
@@ -59,6 +52,9 @@ public class Company implements Serializable {
 		this.id = id;
 	}
 
+	@XmlElement(name = "name")
+	@NotBlank
+	@Column(unique=true)
 	public String getName() {
 		return name;
 	}
@@ -67,6 +63,7 @@ public class Company implements Serializable {
 		this.name = name;
 	}
 
+	@XmlElement(name = "description") 
 	public String getDescription() {
 		return description;
 	}
@@ -75,6 +72,9 @@ public class Company implements Serializable {
 		this.description = description;
 	}
 
+	@XmlElement(name="logo")	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="image_id")
 	public Image getLogo() {
 		return logo;
 	}
@@ -83,6 +83,9 @@ public class Company implements Serializable {
 		this.logo = logo;
 	}
 
+	@XmlElement(name = "company-administrator")
+	@ManyToOne
+	@NotNull
 	public AdminCompany getAdminCompany() {
 		return adminCompany;
 	}
@@ -90,7 +93,12 @@ public class Company implements Serializable {
 	public void setAdminCompany(AdminCompany adminCompany) {
 		this.adminCompany = adminCompany;
 	}
-
+	
+	@XmlElementWrapper(name = "locations")
+	@XmlElement(name = "location")
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	@MapKey(name="name")
+	@NotNull
 	public Map<String, Location> getLocations() {
 		return locations;
 	}

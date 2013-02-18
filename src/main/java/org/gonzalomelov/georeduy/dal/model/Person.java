@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -19,25 +20,11 @@ public class Person implements Serializable {
 	 */
 	private static final long serialVersionUID = -3910258006369491463L;
 
-	@Id
-	@GeneratedValue
 	private Long id;
-	
-	@NotBlank
-	@Column(unique=true)
-	@Email
 	private String email;
-	
-	@NotBlank
-	@Length(min=4,max=25)
 	private String password;
-	
-	@NotNull
 	private String name;
-	
-	@NotNull
 	private String lastname;
-	
 	private Boolean isLogged = false;
 	
 	public Person(){}
@@ -48,51 +35,70 @@ public class Person implements Serializable {
 		this.name = name;
 		this.lastname = lastname;
 	}
+	
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@NotBlank
+	@Column(unique=true)
+	@Email
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@NotBlank
+	@Length(min=4,max=25)
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@NotNull
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@NotNull
 	public String getLastname() {
 		return lastname;
 	}
+	
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
+	public Boolean getIsLogged() {
+		return isLogged;
+	}
+
+	public void setIsLogged(Boolean isLogged) {
+		this.isLogged = isLogged;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
-	}
-
-	public boolean isLogged() {
-		return isLogged;
-	}
-
-	public void setLogged(boolean isLogged) {
-		this.isLogged = isLogged;
 	}
 
 	@Override

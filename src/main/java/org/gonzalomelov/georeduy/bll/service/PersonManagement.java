@@ -47,11 +47,11 @@ public class PersonManagement implements PersonServices {
 			throw new Exception("Not Registered User");
 		}
 		
-		if(p.isLogged()){
+		if(p.getIsLogged()){
 			throw new Exception("Already Logged User");
 		}
 		
-		p.setLogged(true);
+		p.setIsLogged(true);
 		personDAO.update(p);
 		
 		return p;
@@ -65,11 +65,11 @@ public class PersonManagement implements PersonServices {
 			throw new Exception("Not Registered User");
 		}
 		
-		if(!p.isLogged()){
+		if(!p.getIsLogged()){
 			throw new Exception("User Not Logged In");
 		}
 		
-		p.setLogged(false);
+		p.setIsLogged(false);
 		personDAO.update(p);
 	}
 

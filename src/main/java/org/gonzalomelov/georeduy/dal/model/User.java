@@ -16,20 +16,11 @@ public class User extends Person {
 	 */
 	private static final long serialVersionUID = 7713381454732902430L;
 
-	@OneToMany
+	
 	private List<User> contacts = new ArrayList<User>();
-	
-	@OneToMany
 	private List<ThematicCategory> interestedThematicCategories = new ArrayList<ThematicCategory>();
-	
-	@OneToMany(mappedBy="user")
 	private List<CheckIn> checkIns = new ArrayList<CheckIn>();
-	
-	@OneToMany(mappedBy="user")
 	private List<OfferEvaluation> offersBought = new ArrayList<OfferEvaluation>();
-	
-	@ElementCollection(targetClass = NotificationType.class)
-	@Enumerated(EnumType.STRING)
 	private List<NotificationType> interestedNotificationTypes = new ArrayList<NotificationType>();
 	
 	public User(){
@@ -40,6 +31,7 @@ public class User extends Person {
 		super(email, password, name, lastname);
 	}
 
+	@OneToMany
 	public List<User> getContacts() {
 		return contacts;
 	}
@@ -47,7 +39,8 @@ public class User extends Person {
 	public void setContacts(List<User> contacts) {
 		this.contacts = contacts;
 	}
-
+	
+	@OneToMany
 	public List<ThematicCategory> getInterestedThematicCategories() {
 		return interestedThematicCategories;
 	}
@@ -57,6 +50,7 @@ public class User extends Person {
 		this.interestedThematicCategories = interestedThematicCategories;
 	}
 
+	@OneToMany(mappedBy="user")
 	public List<CheckIn> getCheckIns() {
 		return checkIns;
 	}
@@ -64,7 +58,8 @@ public class User extends Person {
 	public void setCheckIns(List<CheckIn> checkIns) {
 		this.checkIns = checkIns;
 	}
-
+	
+	@OneToMany(mappedBy="user")
 	public List<OfferEvaluation> getOffersBought() {
 		return offersBought;
 	}
@@ -73,6 +68,8 @@ public class User extends Person {
 		this.offersBought = offersBought;
 	}
 
+	@ElementCollection(targetClass = NotificationType.class)
+	@Enumerated(EnumType.STRING)
 	public List<NotificationType> getInterestedNotificationTypes() {
 		return interestedNotificationTypes;
 	}

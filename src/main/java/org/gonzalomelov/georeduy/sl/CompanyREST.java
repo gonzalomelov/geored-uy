@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -12,7 +13,7 @@ import org.gonzalomelov.georeduy.bll.interfaces.CompanyServices;
 import org.gonzalomelov.georeduy.dal.model.Company;
 
 
-@Path("/company")
+@Path("/companies")
 public class CompanyREST {
 	
 	@EJB(name="companyServices")
@@ -29,15 +30,16 @@ public class CompanyREST {
 	//Services
 	
 	/**
-	 * Return the company and its information
+	 * Return the company and the information
 	 * 
 	 * @param id Company id
 	 * @return company with its offers and locations
 	 */
 	@GET
+	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Company findCompanyById(Long id) throws Exception {
-		return companyServices.findCompanyById(id);
+	public Company findCompanyById(@PathParam("id") Long id) throws Exception {
+		return companyServices.findCompanyById(id); 
 	}
 
 	/**
@@ -46,16 +48,22 @@ public class CompanyREST {
 	 * @param name Company name
 	 * @return company with its offers and locations
 	 */
-	public Company findCompanyByName(String name) throws Exception {
+	@GET
+	@Path("{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Company findCompanyByName(@PathParam("name") String name) throws Exception {
 		return companyServices.findCompanyByName(name);
 	}
+	
 	
 	/**
 	 * Returns all the registered companies
 	 * 
 	 * @return List of the registered companies without locations and offers
 	 */
-	public List<Company> findAllCompanies() throws Exception {
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Company> findAllCompanies() throws Exception { 		
 		return companyServices.findAllCompanies();
 	}
 	

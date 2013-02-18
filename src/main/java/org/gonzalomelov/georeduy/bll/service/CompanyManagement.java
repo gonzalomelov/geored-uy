@@ -1,5 +1,7 @@
 package org.gonzalomelov.georeduy.bll.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,6 +22,8 @@ import org.gonzalomelov.georeduy.dal.dao.interfaces.CompanyDAO;
 import org.gonzalomelov.georeduy.dal.dao.interfaces.PersonDAO;
 import org.gonzalomelov.georeduy.dal.model.AdminCompany;
 import org.gonzalomelov.georeduy.dal.model.Company;
+import org.gonzalomelov.georeduy.dal.model.Location;
+import org.gonzalomelov.georeduy.dal.model.Offer;
 
 @Stateless(name="companyServices")
 public class CompanyManagement implements CompanyServices {
@@ -37,7 +41,16 @@ public class CompanyManagement implements CompanyServices {
 	@Override
 	public Company findCompanyById(Long id) throws Exception {
 		try {
-			return companyDAO.findByPrimaryKey(id);
+			Company company = companyDAO.findByPrimaryKey(id);
+			//company.getAdminCompany()
+			//company.getLocations()
+			//company.getLogo()
+			for(Location location : company.getLocations().values()){
+				location.setCompany(null);
+				location.setOffers(new ArrayList<Offer>());
+			}
+			company.getAdminCompany().setCompanies(new HashMap<String, Company>());
+			return company;
 		}
 		catch (Exception e){
 			throw e;
@@ -47,7 +60,20 @@ public class CompanyManagement implements CompanyServices {
 	@Override
 	public List<Company> findAllCompanies() throws Exception {
 		try {
-			return companyDAO.findAll();
+			List<Company> companies = companyDAO.findAll();
+			
+			for(Company company : companies){
+				//company.getAdminCompany()
+				//company.getLocations()
+				//company.getLogo()
+				for(Location location : company.getLocations().values()){
+					location.setCompany(null);
+					location.setOffers(new ArrayList<Offer>());
+				}
+				company.getAdminCompany().setCompanies(new HashMap<String, Company>());	
+			}
+			
+			return companies;
 		}
 		catch (Exception e){
 			throw e;

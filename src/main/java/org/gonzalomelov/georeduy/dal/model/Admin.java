@@ -1,7 +1,9 @@
 package org.gonzalomelov.georeduy.dal.model;
 
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlTransient
 @Entity
 public class Admin extends Person {
 	/**
